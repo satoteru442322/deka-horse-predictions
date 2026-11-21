@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DEKA Horse race predictions | 競馬予想コラム＆エッセイ</title>
+  <meta name="google-site-verification" content="O092Ubh1O5czQ2LqA-xzqOA2q-RNaEknbiSplt5oH7c" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700;900&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            turf: {
+              950: '#0a1c14',
+              900: '#102b1f',
+              800: '#183f2e',
+              700: '#215740',
+              100: '#e6f0ec',
+              50: '#f4f8f6',
+            },
+            gold: {
+              600: '#a87d2d',
+              500: '#c59b43',
+              400: '#d8b464',
+              100: '#f9f3e5',
+            },
+            ink: {
+              900: '#1a1a1a',
+              600: '#4a4a4a',
+              400: '#767676',
+            },
+            paper: '#faf9f5'
+          },
+          fontFamily: {
+            sans: ['"Noto Sans JP"', 'sans-serif'],
+            serif: ['"Noto Serif JP"', 'serif'],
+            display: ['"Playfair Display"', '"Noto Serif JP"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #faf9f5;
+      color: #1a1a1a;
+    }
+    .article-body p {
+      margin-bottom: 1.35em;
+      line-height: 1.9;
+    }
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(2px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      overflow-y: auto;
+    }
+    .modal-overlay.is-open {
+      display: flex !important;
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1efe9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c5c0b5;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a39d90;
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-turf-900 text-white border-b border-gold-500/30 sticky top-0 z-30 shadow-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="resetFilter()">
+        <div id="header-site-logo" class="w-9 h-9 rounded-full bg-gold-500/20 border border-gold-400 flex items-center justify-center text-gold-400 font-display font-bold text-lg shrink-0">
+          D
+        </div>
+        <div>
+          <h1 id="header-site-title" class="font-display text-lg sm:text-2xl font-bold tracking-wider text-white leading-none">
+            DEKA Horse race predictions
+          </h1>
+          <p id="header-site-tagline" class="text-[10px] sm:text-xs text-gold-400 tracking-widest mt-0.5">
+            競馬予想コラム＆エッセイ
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-2.5">
+        <!-- Official X Link -->
+        <a id="header-x-link" href="https://x.com/azuki_lovekeiba" target="_blank" rel="noopener noreferrer" title="公式Xを開く" class="px-3 py-2 rounded-lg text-white bg-white/10 hover:bg-white/20 border border-white/15 transition flex items-center gap-1.5 text-xs font-bold">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          <span>公式X</span>
+        </a>
+
+        <!-- Admin Code Generator Button -->
+        <button type="button" onclick="openCodeGenModal()" title="新しい記事用のHTMLコードを生成" class="bg-gold-500 hover:bg-gold-400 text-turf-950 font-bold text-xs px-3 py-2 rounded-lg shadow transition flex items-center gap-1.5 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+          </svg>
+          <span class="hidden sm:inline">記事コード作成</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+      <!-- Left / Center: Articles Feed (8 cols) -->
+      <div class="lg:col-span-8 space-y-6">
+
+        <!-- Category Tabs & Search -->
+        <div class="bg-white p-3 sm:p-4 rounded-xl border border-stone-200/80 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="flex flex-wrap gap-1.5" id="category-tabs">
+            <button type="button" data-cat="ALL" onclick="setCategory('ALL')" class="cat-btn active px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold transition bg-turf-900 text-white cursor-pointer">
+              すべて
+            </button>
+            <button type="button" data-cat="重賞予想" onclick="setCategory('重賞予想')" class="cat-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition text-ink-600 hover:bg-stone-100 cursor-pointer">
+              重賞予想
+            </button>
+            <button type="button" data-cat="エッセイ" onclick="setCategory('エッセイ')" class="cat-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition text-ink-600 hover:bg-stone-100 cursor-pointer">
+              エッセイ
+            </button>
+            <button type="button" data-cat="レース回顧" onclick="setCategory('レース回顧')" class="cat-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition text-ink-600 hover:bg-stone-100 cursor-pointer">
+              レース回顧
+            </button>
+          </div>
+
+          <div class="relative w-full sm:w-56">
+            <input type="text" id="search-input" oninput="renderArticles()" placeholder="レース名・馬名・キーワード..." class="w-full pl-8 pr-3 py-1.5 text-xs sm:text-sm bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:border-turf-700">
+            <svg class="w-4 h-4 text-ink-400 absolute left-2.5 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Article List Container -->
+        <div id="articles-container" class="space-y-5">
+          <!-- Articles injected from PUBLIC_ARTICLES -->
+        </div>
+
+      </div>
+
+      <!-- Right Sidebar: Track Record, Profile & Site Policy (4 cols) -->
+      <aside class="lg:col-span-4 space-y-6">
+
+        <!-- Clean Track Record Card -->
+        <div class="bg-white rounded-xl border border-stone-200/80 shadow-sm overflow-hidden">
+          <div class="bg-turf-900 px-5 py-3.5 border-b border-gold-500/30 flex items-center justify-between">
+            <h2 class="text-white font-serif font-bold text-sm tracking-wider flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-gold-400"></span>
+              予想印 実績トラッカー
+            </h2>
+            <span class="text-[11px] text-gold-400 font-medium">好走率・連対率</span>
+          </div>
+          <div class="p-5 space-y-4">
+            <div class="grid grid-cols-2 gap-3">
+              <div class="bg-turf-50 border border-turf-100 rounded-lg p-3 text-center">
+                <p class="text-[11px] text-turf-800 font-bold mb-1">本命◎ 連対率</p>
+                <p id="stat-honmei-rentai" class="font-display text-2xl font-extrabold text-turf-900">--%</p>
+                <p id="stat-honmei-count" class="text-[10px] text-ink-400 mt-0.5">0 / 0 レース</p>
+              </div>
+              <div class="bg-gold-100/60 border border-gold-400/30 rounded-lg p-3 text-center">
+                <p class="text-[11px] text-gold-600 font-bold mb-1">本命◎ 3着内率</p>
+                <p id="stat-honmei-fukusho" class="font-display text-2xl font-extrabold text-ink-900">--%</p>
+                <p id="stat-total-races" class="text-[10px] text-ink-400 mt-0.5">結果登録 0件</p>
+              </div>
+            </div>
+
+            <div class="space-y-2.5 pt-2 border-t border-stone-100 text-xs">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-ink-600 flex items-center gap-1.5">
+                  <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-red-100 text-red-700 font-bold text-[11px]">◎</span>
+                  本命 1着回数
+                </span>
+                <span id="stat-1st-count" class="font-bold text-ink-900">0 回</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-ink-600 flex items-center gap-1.5">
+                  <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 text-blue-700 font-bold text-[11px]">○</span>
+                  対抗 3着内回数
+                </span>
+                <span id="stat-taikou-count" class="font-bold text-ink-900">0 回</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-ink-600 flex items-center gap-1.5">
+                  <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-[11px]">▲</span>
+                  単穴 3着内回数
+                </span>
+                <span id="stat-tanana-count" class="font-bold text-ink-900">0 回</span>
+              </div>
+            </div>
+
+            <p class="text-[11px] text-ink-400 leading-relaxed bg-stone-50 p-2.5 rounded-lg border border-stone-100">
+              ※公開済みコラムのレース結果に基づき、連対率・3着内率を自動集計しています。
+            </p>
+          </div>
+        </div>
+
+        <!-- Author Profile Card -->
+        <div class="bg-white rounded-xl border border-stone-200/80 shadow-sm p-5 space-y-3.5">
+          <div class="flex items-center gap-3">
+            <div id="author-avatar" class="w-12 h-12 rounded-full bg-turf-800 text-gold-400 font-serif font-bold text-lg flex items-center justify-center border-2 border-gold-500/40 shrink-0">
+              デ
+            </div>
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-gold-600 block">COLUMNIST</span>
+              <h3 id="sidebar-author-name" class="font-serif font-bold text-base text-ink-900">デカマサ(現役素人高校生)</h3>
+            </div>
+          </div>
+          <p id="sidebar-author-bio" class="text-xs text-ink-600 leading-relaxed">
+            オッズの損得に縛られない純粋な視点で、重賞展望や好きな馬特集、心に残った名勝負のエッセイをマイペースに記録する現役高校生の個人競馬メディア。G1は確実に予想します。
+          </p>
+
+          <!-- Official X Button -->
+          <a id="sidebar-x-link" href="https://x.com/azuki_lovekeiba" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-bold flex items-center justify-center gap-2 transition shadow-xs">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span id="sidebar-x-handle">公式X (@azuki_lovekeiba)</span>
+          </a>
+
+          <div class="pt-2 border-t border-stone-100 flex items-center justify-between text-[11px] text-ink-400">
+            <span>公開記事数: <strong id="sidebar-article-count" class="text-ink-900">0</strong> 本</span>
+            <span>Updated Weekly</span>
+          </div>
+        </div>
+
+        <!-- Site Policy & Disclaimer Card -->
+        <div class="bg-stone-100/90 rounded-xl border border-stone-300/80 p-5 space-y-2.5">
+          <h3 class="font-serif font-bold text-xs text-ink-900 flex items-center gap-1.5 tracking-wider">
+            <svg class="w-4 h-4 text-gold-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+            サイトポリシー・免責事項
+          </h3>
+          <ul class="text-[11px] text-ink-600 space-y-1.5 leading-relaxed list-disc pl-4">
+            <li><strong class="text-ink-800">20歳未満の馬券購入は法律で禁止されています。</strong></li>
+            <li>当サイトの運営者は未成年のため、<strong class="text-ink-800">実際の馬券購入・払い戻しは一切行っておりません。</strong>純粋なレース分析・競馬文化の考察およびエッセイ執筆を目的として運営しています。</li>
+            <li>当サイトに掲載された予想・見解をもとに馬券を購入された場合でも、<strong class="text-ink-800">当サイトおよび運営者は一切の責任を負いません。</strong>馬券の購入はご自身の判断と責任においてお楽しみください。</li>
+          </ul>
+        </div>
+
+      </aside>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-turf-950 text-stone-400 py-8 border-t border-turf-800 mt-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 space-y-4">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <p id="footer-copyright">© DEKA Horse race predictions. All Rights Reserved.</p>
+        <div class="flex items-center gap-4">
+          <a id="footer-x-link" href="https://x.com/azuki_lovekeiba" target="_blank" rel="noopener noreferrer" class="text-stone-300 hover:text-gold-400 transition flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span id="footer-x-text">公式X (@azuki_lovekeiba)</span>
+          </a>
+        </div>
+      </div>
+      <div class="pt-4 border-t border-turf-900 text-[11px] text-stone-500 leading-relaxed space-y-1">
+        <p>【運営ポリシー・免責事項】20歳未満の勝馬投票券（馬券）の購入は競馬法により禁止されています。当サイト運営者は未成年のため馬券購入を一切行っておらず、レースの展望やエッセイの発信のみを目的としています。</p>
+        <p>また、当サイトの予想や記事内容を参考にした馬券購入およびそれに伴ういかなる損害・トラブルについても、当サイトは一切の責任を負いません。</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- 1. Article Reader Modal -->
+  <div id="reader-modal" class="modal-overlay" onclick="handleBackdropClick(event, 'reader-modal')">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden my-auto" onclick="event.stopPropagation()">
+      <!-- Modal Top Bar -->
+      <div class="px-6 py-4 bg-stone-50 border-b border-stone-200 flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2">
+          <span id="reader-category" class="px-2.5 py-0.5 rounded text-xs font-bold bg-turf-900 text-white">重賞予想</span>
+          <span id="reader-date" class="text-xs text-ink-400">2026.11.22</span>
+        </div>
+        <button type="button" onclick="closeReaderModal()" class="p-1.5 rounded-lg text-ink-400 hover:text-ink-900 hover:bg-stone-200/60 transition cursor-pointer">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Scrollable Content -->
+      <div class="p-6 sm:p-8 overflow-y-auto space-y-6">
+        <div>
+          <p id="reader-race" class="text-xs font-bold text-gold-600 tracking-wider mb-1.5"></p>
+          <h2 id="reader-title" class="font-serif text-2xl sm:text-3xl font-bold text-ink-900 leading-snug"></h2>
+          <p id="reader-subtitle" class="text-sm text-ink-600 mt-2"></p>
+        </div>
+
+        <!-- Picks Box (if any) -->
+        <div id="reader-picks-box" class="bg-turf-50 border border-turf-100 rounded-xl p-4 sm:p-5 hidden">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="text-xs font-bold text-turf-900 tracking-wider">印・注目馬</span>
+            <span id="reader-result-label"></span>
+          </div>
+          <div id="reader-picks-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm"></div>
+        </div>
+
+        <!-- Body Text -->
+        <div id="reader-body" class="article-body text-ink-900 text-base border-t border-stone-100 pt-6"></div>
+
+        <!-- Share & Copy Link Footer -->
+        <div class="pt-6 border-t border-stone-200 flex flex-wrap items-center justify-between gap-3">
+          <span class="text-xs text-ink-400">この記事をシェア・URLコピーする</span>
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button type="button" id="copy-link-btn" onclick="copyArticleLink()" class="bg-stone-100 hover:bg-stone-200 border border-stone-300 text-ink-800 text-xs font-bold px-3.5 py-2 rounded-lg transition flex items-center gap-1.5 cursor-pointer">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+              </svg>
+              <span id="copy-link-text">URLをコピー</span>
+            </button>
+            <button type="button" onclick="shareToX()" class="bg-black hover:bg-neutral-800 text-white text-xs font-bold px-4 py-2 rounded-lg transition flex items-center gap-2 cursor-pointer">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              X に投稿する
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Admin Article Code Generator Modal -->
+  <div id="codegen-modal" class="modal-overlay" onclick="handleBackdropClick(event, 'codegen-modal')">
+    <div class="bg-white rounded-2xl max-w-5xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden my-auto" onclick="event.stopPropagation()">
+      <div class="px-6 py-4 bg-turf-900 text-white flex items-center justify-between">
+        <div>
+          <h3 class="font-serif font-bold text-base sm:text-lg">管理人用：記事コード生成ツール</h3>
+          <p class="text-[11px] text-gold-400">入力した内容を、HTML内の PUBLIC_ARTICLES に貼るだけのコードに変換します</p>
+        </div>
+        <button type="button" onclick="closeCodeGenModal()" class="text-stone-300 hover:text-white p-1 cursor-pointer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 flex-grow overflow-y-auto">
+        <!-- Left: Form -->
+        <div class="p-6 space-y-3.5 border-b lg:border-b-0 lg:border-r border-stone-200 overflow-y-auto">
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-ink-600 mb-1">カテゴリー</label>
+              <select id="gen-category" oninput="generateArticleSnippet()" class="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-lg">
+                <option value="重賞予想">重賞予想</option>
+                <option value="エッセイ">エッセイ</option>
+                <option value="レース回顧">レース回顧</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-ink-600 mb-1">公開日</label>
+              <input type="text" id="gen-date" oninput="generateArticleSnippet()" class="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-lg">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-ink-600 mb-1">対象レース名（任意）</label>
+              <input type="text" id="gen-race" oninput="generateArticleSnippet()" placeholder="例：ジャパンカップ (G1)" class="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-lg">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-ink-600 mb-1">レース結果（確定後に設定）</label>
+              <select id="gen-result" oninput="generateArticleSnippet()" class="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-lg">
+                <option value="">未確定（結果待ち）</option>
+                <option value="honmei_1">◎ 本命 1着</option>
+                <option value="honmei_2">◎ 本命 2着</option>
+                <option value="honmei_3">◎ 本命 3着</option>
+                <option value="taikou_in">○ 対抗 3着内（◎着外）</option>
+                <option value="tanana_in">▲ 単穴 3着内（◎○着外）</option>
+                <option value="miss">印馬 着外</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-ink-600 mb-1">記事タイトル</label>
+            <input type="text" id="gen-title" oninput="generateArticleSnippet()" placeholder="タイトルを入力..." class="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-lg">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-ink-600 mb-1">サブタイトル・リード文（任意）</label>
+            <input type="text" id="gen-subtitle" oninput="generateArticleSnippet()" placeholder="要約やキャッチコピーを1行で" class="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-lg">
+          </div>
+
+          <div class="bg-stone-50 p-3 rounded-xl border border-stone-200 space-y-2">
+            <span class="block text-[11px] font-bold text-ink-700">予想印（空欄は非表示）</span>
+            <div class="grid grid-cols-2 gap-2">
+              <input type="text" id="gen-honmei" oninput="generateArticleSnippet()" placeholder="◎ 本命馬名" class="px-2.5 py-1 text-xs bg-white border border-stone-300 rounded">
+              <input type="text" id="gen-taikou" oninput="generateArticleSnippet()" placeholder="○ 対抗馬名" class="px-2.5 py-1 text-xs bg-white border border-stone-300 rounded">
+              <input type="text" id="gen-tanana" oninput="generateArticleSnippet()" placeholder="▲ 単穴馬名" class="px-2.5 py-1 text-xs bg-white border border-stone-300 rounded">
+              <input type="text" id="gen-renka" oninput="generateArticleSnippet()" placeholder="△ 連下・注目馬" class="px-2.5 py-1 text-xs bg-white border border-stone-300 rounded">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-ink-600 mb-1">本文</label>
+            <textarea id="gen-body" rows="6" oninput="generateArticleSnippet()" placeholder="ここに本文を書くと、右側に貼り付け用コードが自動生成されます。" class="w-full px-3 py-2 text-xs border border-stone-300 rounded-lg leading-relaxed"></textarea>
+          </div>
+        </div>
+
+        <!-- Right: Generated Code Output -->
+        <div class="p-6 bg-stone-900 text-stone-100 flex flex-col justify-between space-y-4">
+          <div class="space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-gold-400">生成された記事コード（コピー用）</span>
+              <button type="button" onclick="copyGeneratedCode()" class="bg-gold-500 hover:bg-gold-400 text-turf-950 font-bold text-xs px-3 py-1.5 rounded transition cursor-pointer">
+                <span id="gen-copy-text">コードをコピー</span>
+              </button>
+            </div>
+            <pre id="gen-code-output" class="bg-black/60 border border-stone-700 rounded-lg p-3.5 text-[11px] font-mono text-emerald-300 overflow-x-auto whitespace-pre-wrap max-h-72 leading-relaxed"></pre>
+          </div>
+
+          <div class="bg-stone-800/80 border border-stone-700 rounded-xl p-4 text-xs space-y-1.5 text-stone-300 leading-relaxed">
+            <p class="font-bold text-white">📌 サイトに記事を公開する手順：</p>
+            <ol class="list-decimal pl-4 space-y-1 text-[11px]">
+              <li>上の「コードをコピー」ボタンを押す。</li>
+              <li>`index.html` をメモ帳やエディタで開き、下のほうにある <code class="text-gold-400">const PUBLIC_ARTICLES = [</code> のすぐ下に貼り付ける。</li>
+              <li>上書き保存してGitHub Pagesなどにアップロードすると、世界中の読者に公開されます！</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       ▼ サイト設定・記事データ管理エリア（ここを書き換えて公開します） ▼
+       ========================================================================= -->
+  <script>
+    // 1. サイト基本設定
+    const SITE_CONFIG = {
+      siteTitle: 'DEKA Horse race predictions',
+      siteTagline: '競馬予想コラム＆エッセイ',
+      authorName: 'デカマサ(現役素人高校生)',
+      xId: 'azuki_lovekeiba',
+      authorBio: 'オッズの損得に縛られない純粋な視点で、重賞展望や好きな馬特集、心に残った名勝負のエッセイをマイペースに記録する現役高校生の個人競馬メディア。G1は確実に予想します。'
+    };
+
+    // 2. 公開記事リスト（新しい記事は一番上に追加すると先頭に表示されます）
+    // ※「記事コード作成」ボタンで作ったコードを、この [ と ] の間に貼り付けてください。
+    const PUBLIC_ARTICLES = [
+      /* ── ここに新しい記事コードを貼り付け ── */
+
+      {
+        id: 'art_20261122_01',
+        category: 'エッセイ',
+        race: 'ご挨拶・運営方針',
+        title: 'サイト開設第一回目の投稿　挨拶',
+        subtitle: 'DEKA Horse race predictions 開設にあたって',
+        picks: {
+          honmei: '',
+          taikou: '',
+          tanana: '',
+          renka: ''
+        },
+        body: 'はじめまして。当サイト「DEKA Horse race predictions」を運営している、現役高校生のデカマサです。\n\n高校生なのでもちろん馬券購入はできませんが、つね日ごろから競馬予想を立てている（授業中とかでもしちゃうかも）、いたって純粋でピチピチな素人現役高校生による目線での競馬予想を、同じ競馬ファンの方々に提供していきたいと思います。\n\nあくまで現役高校生の立場なので、皆様が期待するような血統やら確率やら好走率などの信ぴょう性がありそうなデータを提供することは難しいと思います。けれどそれは裏を返せば、よくXに転がっているような「このデータ眉唾だろ」や「絶対AIに丸投げしてるだけだろ」みたいな薄っぺらい予想ではなく、素人現役高校生DEKAが自分の頭で一生懸命考えた予想を、皆様の参考になるように提供していきたいということです。\n\n高校生なので、テスト勉強とか模試とか部活とか恋愛とかとの兼ね合いで、安定したサイト運営ができない可能性がありますが、それはご愛嬌ということで、大目に見てやってください。ただ、G1は確実に予想します。\n\n改めて、このサイトでは、オッズの損得に縛られない純粋な視点での重賞展望や、番外編としてDEKAの好きな馬特集、そしてDEKAの心に残った名勝負のエッセイをマイペースに記録していきます。',
+        date: '2026.11.22',
+        result: ''
+      }
+    ];
+  </script>
+
+  <!-- ================= SYSTEM LOGIC (ここは触らなくてOK) ================= -->
+  <script>
+    let currentCategory = 'ALL';
+    let activeArticleId = null;
+
+    function init() {
+      applySettings();
+      renderArticles();
+      updateStats();
+      checkUrlHash();
+    }
+
+    function applySettings() {
+      document.title = `${SITE_CONFIG.siteTitle} | ${SITE_CONFIG.siteTagline}`;
+      document.getElementById('header-site-title').textContent = SITE_CONFIG.siteTitle;
+      document.getElementById('header-site-tagline').textContent = SITE_CONFIG.siteTagline;
+
+      const logoChar = SITE_CONFIG.siteTitle ? SITE_CONFIG.siteTitle.trim().charAt(0).toUpperCase() : 'D';
+      document.getElementById('header-site-logo').textContent = logoChar;
+
+      document.getElementById('sidebar-author-name').textContent = SITE_CONFIG.authorName;
+      document.getElementById('sidebar-author-bio').textContent = SITE_CONFIG.authorBio;
+      document.getElementById('author-avatar').textContent = SITE_CONFIG.authorName ? SITE_CONFIG.authorName.trim().charAt(0) : '筆';
+      document.getElementById('footer-copyright').textContent = `© ${new Date().getFullYear()} ${SITE_CONFIG.siteTitle}. All Rights Reserved.`;
+
+      const cleanXId = (SITE_CONFIG.xId || 'azuki_lovekeiba').replace(/^@/, '');
+      const xUrl = `https://x.com/${cleanXId}`;
+      document.getElementById('header-x-link').href = xUrl;
+      document.getElementById('sidebar-x-link').href = xUrl;
+      document.getElementById('footer-x-link').href = xUrl;
+      document.getElementById('sidebar-x-handle').textContent = `公式X (@${cleanXId})`;
+      document.getElementById('footer-x-text').textContent = `公式X (@${cleanXId})`;
+    }
+
+    function checkUrlHash() {
+      const hash = window.location.hash;
+      if (hash && hash.startsWith('#article=')) {
+        const targetId = decodeURIComponent(hash.replace('#article=', ''));
+        if (PUBLIC_ARTICLES.some(a => a.id === targetId)) {
+          openReaderModal(targetId);
+        }
+      }
+    }
+
+    function showModal(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function hideModal(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function handleBackdropClick(event, modalId) {
+      if (event.target.id === modalId) {
+        if (modalId === 'reader-modal') closeReaderModal();
+        if (modalId === 'codegen-modal') closeCodeGenModal();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeReaderModal();
+        closeCodeGenModal();
+      }
+    });
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.classList.add('bg-turf-900', 'text-white', 'font-bold');
+          btn.classList.remove('text-ink-600', 'hover:bg-stone-100', 'font-medium');
+        } else {
+          btn.classList.remove('bg-turf-900', 'text-white', 'font-bold');
+          btn.classList.add('text-ink-600', 'hover:bg-stone-100', 'font-medium');
+        }
+      });
+      renderArticles();
+    }
+
+    function resetFilter() {
+      document.getElementById('search-input').value = '';
+      setCategory('ALL');
+    }
+
+    function renderArticles() {
+      const container = document.getElementById('articles-container');
+      const query = document.getElementById('search-input').value.trim().toLowerCase();
+
+      document.getElementById('sidebar-article-count').textContent = PUBLIC_ARTICLES.length;
+
+      const filtered = PUBLIC_ARTICLES.filter(art => {
+        const matchCat = currentCategory === 'ALL' || art.category === currentCategory;
+        if (!matchCat) return false;
+        if (!query) return true;
+        const searchable = [
+          art.title,
+          art.subtitle,
+          art.race,
+          art.body,
+          art.picks?.honmei,
+          art.picks?.taikou,
+          art.picks?.tanana,
+          art.picks?.renka
+        ].filter(Boolean).join(' ').toLowerCase();
+        return searchable.includes(query);
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white rounded-xl border border-dashed border-stone-300 p-10 sm:p-14 text-center space-y-2">
+            <h3 class="font-serif font-bold text-lg text-ink-900">該当するコラムが見つかりません</h3>
+            <p class="text-xs sm:text-sm text-ink-500">検索キーワードやカテゴリーを変更してお試しください。</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(art => {
+        const hasHonmei = art.picks && art.picks.honmei;
+        const resultBadge = getResultBadge(art.result);
+        return `
+          <article onclick="openReaderModal('${art.id}')" class="bg-white rounded-xl border border-stone-200/80 hover:border-gold-500/60 shadow-xs hover:shadow-md transition p-5 sm:p-6 cursor-pointer group">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+              <div class="flex items-center gap-2">
+                <span class="px-2.5 py-0.5 rounded text-[11px] font-bold bg-turf-900 text-white">${escapeHtml(art.category)}</span>
+                ${art.race ? `<span class="text-xs font-bold text-gold-600">${escapeHtml(art.race)}</span>` : ''}
+              </div>
+              <div class="flex items-center gap-2">
+                ${resultBadge}
+                <time class="text-xs text-ink-400">${escapeHtml(art.date)}</time>
+              </div>
+            </div>
+
+            <h3 class="font-serif text-lg sm:text-xl font-bold text-ink-900 group-hover:text-turf-700 transition leading-snug mb-1.5">
+              ${escapeHtml(art.title)}
+            </h3>
+
+            ${art.subtitle ? `<p class="text-xs sm:text-sm text-ink-600 mb-3 line-clamp-2">${escapeHtml(art.subtitle)}</p>` : ''}
+
+            <p class="text-xs text-ink-500 line-clamp-2 leading-relaxed mb-4">
+              ${escapeHtml(art.body)}
+            </p>
+
+            <div class="pt-3 border-t border-stone-100 flex items-center justify-between text-xs">
+              <div>
+                ${hasHonmei ? `
+                  <span class="inline-flex items-center gap-1.5 font-bold text-ink-800 bg-red-50 border border-red-100 px-2.5 py-1 rounded-md">
+                    <span class="text-red-600">◎</span> ${escapeHtml(art.picks.honmei)}
+                  </span>
+                ` : '<span class="text-ink-400 text-[11px]">エッセイ・読み物</span>'}
+              </div>
+              <span class="text-turf-700 font-bold group-hover:translate-x-0.5 transition-transform">続きを読む →</span>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    function getResultBadge(result) {
+      const map = {
+        honmei_1: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-100 text-red-700">◎ 1着</span>',
+        honmei_2: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-orange-100 text-orange-700">◎ 2着</span>',
+        honmei_3: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-700">◎ 3着</span>',
+        taikou_in: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700">○ 3着内</span>',
+        tanana_in: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-700">▲ 3着内</span>',
+        miss: '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-stone-100 text-stone-500">結果確定</span>'
+      };
+      return map[result] || '';
+    }
+
+    function updateStats() {
+      const graded = PUBLIC_ARTICLES.filter(a => a.result && a.result !== '');
+      const total = graded.length;
+
+      let honmei1st = 0;
+      let honmei2nd = 0;
+      let honmei3rd = 0;
+      let taikouIn = 0;
+      let tananaIn = 0;
+
+      graded.forEach(a => {
+        if (a.result === 'honmei_1') honmei1st++;
+        if (a.result === 'honmei_2') honmei2nd++;
+        if (a.result === 'honmei_3') honmei3rd++;
+        if (a.result === 'taikou_in') taikouIn++;
+        if (a.result === 'tanana_in') tananaIn++;
+      });
+
+      const rentaiCount = honmei1st + honmei2nd;
+      const fukushoCount = rentaiCount + honmei3rd;
+
+      const rentaiRate = total > 0 ? Math.round((rentaiCount / total) * 100) : null;
+      const fukushoRate = total > 0 ? Math.round((fukushoCount / total) * 100) : null;
+
+      document.getElementById('stat-honmei-rentai').textContent = rentaiRate !== null ? `${rentaiRate}%` : '--%';
+      document.getElementById('stat-honmei-fukusho').textContent = fukushoRate !== null ? `${fukushoRate}%` : '--%';
+      document.getElementById('stat-honmei-count').textContent = `${rentaiCount} / ${total} レース`;
+      document.getElementById('stat-total-races').textContent = `結果登録 ${total}件`;
+
+      document.getElementById('stat-1st-count').textContent = `${honmei1st} 回`;
+      document.getElementById('stat-taikou-count').textContent = `${taikouIn} 回`;
+      document.getElementById('stat-tanana-count').textContent = `${tananaIn} 回`;
+    }
+
+    function openReaderModal(id) {
+      const art = PUBLIC_ARTICLES.find(a => a.id === id);
+      if (!art) return;
+      activeArticleId = id;
+
+      try {
+        history.replaceState(null, '', `#article=${encodeURIComponent(id)}`);
+      } catch (e) {}
+
+      document.getElementById('copy-link-text').textContent = 'URLをコピー';
+      document.getElementById('reader-category').textContent = art.category;
+      document.getElementById('reader-date').textContent = art.date;
+      document.getElementById('reader-race').textContent = art.race || '';
+      document.getElementById('reader-title').textContent = art.title;
+      document.getElementById('reader-subtitle').textContent = art.subtitle || '';
+      document.getElementById('reader-subtitle').style.display = art.subtitle ? 'block' : 'none';
+
+      const picksBox = document.getElementById('reader-picks-box');
+      const picksList = document.getElementById('reader-picks-list');
+      const p = art.picks || {};
+      const items = [];
+      if (p.honmei) items.push(`<div class="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-stone-200"><span class="w-5 h-5 rounded-full bg-red-100 text-red-700 font-bold text-xs flex items-center justify-center">◎</span><span class="font-bold">${escapeHtml(p.honmei)}</span></div>`);
+      if (p.taikou) items.push(`<div class="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-stone-200"><span class="w-5 h-5 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center">○</span><span class="font-bold">${escapeHtml(p.taikou)}</span></div>`);
+      if (p.tanana) items.push(`<div class="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-stone-200"><span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 font-bold text-xs flex items-center justify-center">▲</span><span class="font-bold">${escapeHtml(p.tanana)}</span></div>`);
+      if (p.renka) items.push(`<div class="flex items-center gap-2 bg-white px-3 py-2 rounded-lg border border-stone-200"><span class="w-5 h-5 rounded-full bg-amber-100 text-amber-700 font-bold text-xs flex items-center justify-center">△</span><span class="font-medium">${escapeHtml(p.renka)}</span></div>`);
+
+      if (items.length > 0) {
+        picksList.innerHTML = items.join('');
+        document.getElementById('reader-result-label').innerHTML = getResultBadge(art.result);
+        picksBox.classList.remove('hidden');
+      } else {
+        picksBox.classList.add('hidden');
+      }
+
+      const paragraphs = art.body.split(/\n+/).filter(line => line.trim() !== '');
+      document.getElementById('reader-body').innerHTML = paragraphs.map(line => `<p>${escapeHtml(line)}</p>`).join('');
+
+      showModal('reader-modal');
+    }
+
+    function closeReaderModal() {
+      hideModal('reader-modal');
+      activeArticleId = null;
+      try {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      } catch (e) {}
+    }
+
+    function copyArticleLink() {
+      const shareUrl = window.location.href;
+      const btnText = document.getElementById('copy-link-text');
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          btnText.textContent = 'コピー完了！';
+          setTimeout(() => { btnText.textContent = 'URLをコピー'; }, 2000);
+        }).catch(() => fallbackCopyText(shareUrl, btnText));
+      } else {
+        fallbackCopyText(shareUrl, btnText);
+      }
+    }
+
+    function fallbackCopyText(text, btnTextEl) {
+      const tempInput = document.createElement('input');
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        btnTextEl.textContent = 'コピー完了！';
+        setTimeout(() => { btnTextEl.textContent = 'URLをコピー'; }, 2000);
+      } catch (err) {
+        alert('URLのコピーに失敗しました: ' + text);
+      }
+      document.body.removeChild(tempInput);
+    }
+
+    function shareToX() {
+      const art = PUBLIC_ARTICLES.find(a => a.id === activeArticleId);
+      if (!art) return;
+      const cleanXId = (SITE_CONFIG.xId || 'azuki_lovekeiba').replace(/^@/, '');
+      let text = `【${art.category}】${art.title}`;
+      if (art.race) text += `\n対象：${art.race}`;
+      if (art.picks && art.picks.honmei) text += `\n本命◎：${art.picks.honmei}`;
+      if (window.location.protocol.startsWith('http')) {
+        text += `\n${window.location.href}`;
+      }
+      text += `\n#${SITE_CONFIG.siteTitle.replace(/\s+/g, '')} #競馬予想 @${cleanXId}`;
+      const url = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    // Admin Code Generator Logic
+    function openCodeGenModal() {
+      const now = new Date();
+      const dateStr = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}`;
+      document.getElementById('gen-date').value = dateStr;
+      generateArticleSnippet();
+      showModal('codegen-modal');
+    }
+
+    function closeCodeGenModal() {
+      hideModal('codegen-modal');
+    }
+
+    function generateArticleSnippet() {
+      const obj = {
+        id: 'art_' + Date.now(),
+        category: document.getElementById('gen-category').value,
+        race: document.getElementById('gen-race').value.trim(),
+        title: document.getElementById('gen-title').value.trim() || '（タイトル未入力）',
+        subtitle: document.getElementById('gen-subtitle').value.trim(),
+        picks: {
+          honmei: document.getElementById('gen-honmei').value.trim(),
+          taikou: document.getElementById('gen-taikou').value.trim(),
+          tanana: document.getElementById('gen-tanana').value.trim(),
+          renka: document.getElementById('gen-renka').value.trim()
+        },
+        body: document.getElementById('gen-body').value.trim() || 'ここに本文が入ります。',
+        date: document.getElementById('gen-date').value.trim() || '2026.11.22',
+        result: document.getElementById('gen-result').value
+      };
+
+      const snippet = JSON.stringify(obj, null, 2) + ',';
+      document.getElementById('gen-code-output').textContent = snippet;
+    }
+
+    function copyGeneratedCode() {
+      const code = document.getElementById('gen-code-output').textContent;
+      const btnText = document.getElementById('gen-copy-text');
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(code).then(() => {
+          btnText.textContent = 'コピー完了！';
+          setTimeout(() => { btnText.textContent = 'コードをコピー'; }, 2000);
+        }).catch(() => fallbackCopyText(code, btnText));
+      } else {
+        fallbackCopyText(code, btnText);
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    init();
+  </script>
+</body>
+</html>
