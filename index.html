@@ -82,10 +82,13 @@
         </div>
       </a>
 
-      <div class="flex items-center gap-2.5">
+      <div class="flex flex-wrap items-center gap-2">
         <a id="headerXLink" href="https://x.com/azuki_lovekeiba" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-xs font-medium transition">
           <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           <span>公式X</span>
+        </a>
+        <a id="headerNoteLink" href="https://note.com/deka_keibayosou/portal" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#41c9b4]/90 hover:bg-[#41c9b4] text-turf-950 text-xs font-bold transition">
+          <span>公式note</span>
         </a>
         <button id="openEditorBtn" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gold-500 hover:bg-gold-400 text-turf-950 text-xs font-bold transition cursor-pointer">
           <span>&lt;/&gt; 記事コード作成</span>
@@ -184,10 +187,15 @@
         <p id="profileBioText" class="text-xs leading-relaxed text-ink-700">
           オッズの損得に縛られない純粋な視点で、重賞展望や好きな馬特集、心に残った名勝負のエッセイをマイペースに記録する現役高校生の個人競馬メディア。G1は確実に予想します。
         </p>
-        <a id="profileXButton" href="https://x.com/azuki_lovekeiba" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-ink-900 hover:bg-ink-700 text-white text-xs font-bold transition">
-          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          <span id="profileXLabel">公式X (@azuki_lovekeiba)</span>
-        </a>
+        <div class="space-y-2">
+          <a id="profileXButton" href="https://x.com/azuki_lovekeiba" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-ink-900 hover:bg-ink-700 text-white text-xs font-bold transition">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span id="profileXLabel">公式X (@azuki_lovekeiba)</span>
+          </a>
+          <a id="profileNoteButton" href="https://note.com/deka_keibayosou/portal" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-[#41c9b4] hover:opacity-90 text-turf-950 text-xs font-bold transition">
+            <span id="profileNoteLabel">公式note (DEKAの競馬予想)</span>
+          </a>
+        </div>
         <div class="pt-2 border-t border-ink-300/50 flex items-center justify-between text-[11px] text-ink-500">
           <span>公開記事数: <strong id="articleCountBadge" class="text-ink-900">1</strong> 本</span>
           <span id="updateFrequencyLabel">Updated Weekly</span>
@@ -213,7 +221,7 @@
     <div class="max-w-5xl mx-auto px-4 space-y-2">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
         <p id="footerSiteName" class="font-mono tracking-wider text-white/90">DEKA // Horse race predictions</p>
-        <p>運営：デカマサ（現役素人高校生） / <a href="https://x.com/azuki_lovekeiba" target="_blank" rel="noopener noreferrer" class="underline hover:text-gold-400">@azuki_lovekeiba</a></p>
+        <p>運営：デカマサ（現役素人高校生） / <a href="https://x.com/azuki_lovekeiba" target="_blank" rel="noopener noreferrer" class="underline hover:text-gold-400">公式X</a> / <a href="https://note.com/deka_keibayosou/portal" target="_blank" rel="noopener noreferrer" class="underline hover:text-gold-400">公式note</a></p>
       </div>
       <p class="text-[10px] text-turf-100/60 leading-relaxed">
         【サイトポリシー】20歳未満の馬券購入は法律で禁止されています。当サイトは未成年の運営者による純粋な競馬考察・エッセイメディアであり、馬券の購入・推奨・払い戻しは一切行っておりません。最終的な馬券購入はご自身の判断と責任でお願いいたします。
@@ -322,6 +330,8 @@
         bio: 'オッズの損得に縛られない純粋な視点で、重賞展望や好きな馬特集、心に残った名勝負のエッセイをマイペースに記録する現役高校生の個人競馬メディア。G1は確実に予想します。',
         xHandle: '@azuki_lovekeiba',
         xUrl: 'https://x.com/azuki_lovekeiba',
+        noteUrl: 'https://note.com/deka_keibayosou/portal',
+        noteLabel: '公式note (DEKAの競馬予想)',
         updateFrequency: 'Updated Weekly'
       }
     };
@@ -388,6 +398,9 @@
       document.getElementById('profileXButton').href = p.xUrl;
       document.getElementById('headerXLink').href = p.xUrl;
       document.getElementById('profileXLabel').textContent = `公式X (${p.xHandle})`;
+      document.getElementById('profileNoteButton').href = p.noteUrl;
+      document.getElementById('headerNoteLink').href = p.noteUrl;
+      document.getElementById('profileNoteLabel').textContent = p.noteLabel;
       document.getElementById('updateFrequencyLabel').textContent = p.updateFrequency;
       document.getElementById('articleCountBadge').textContent = ARTICLES.length;
 
