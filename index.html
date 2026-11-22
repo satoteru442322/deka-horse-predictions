@@ -114,6 +114,7 @@
     </div>
 
     <aside class="lg:col-span-4 space-y-4">
+      <!-- 予想印 実績トラッカー -->
       <section class="bg-white rounded-xl border border-ink-300/60 p-4 shadow-sm space-y-3">
         <div class="flex items-center justify-between">
           <h2 class="font-serif text-sm font-bold text-turf-950 flex items-center gap-1.5">
@@ -168,6 +169,7 @@
         </div>
       </section>
 
+      <!-- プロフィールカード -->
       <section class="bg-white rounded-xl border border-ink-300/60 p-4 shadow-sm space-y-3">
         <div class="flex items-center gap-3">
           <div id="profileAvatarWrapper" class="w-10 h-10 rounded-full bg-turf-900 text-gold-400 font-serif font-bold text-sm flex items-center justify-center overflow-hidden shrink-0">
@@ -192,6 +194,7 @@
         </div>
       </section>
 
+      <!-- サイトポリシー・免責事項 -->
       <section class="bg-white rounded-xl border border-ink-300/60 p-4 shadow-sm space-y-2.5">
         <h2 class="text-xs font-bold text-ink-900 flex items-center gap-1.5">
           <span class="text-gold-600">⚠</span>
@@ -218,6 +221,7 @@
     </div>
   </footer>
 
+  <!-- 記事詳細モーダル（いいね・コメント・シェア機能付き） -->
   <div id="articleModal" class="fixed inset-0 z-50 hidden bg-black/60 items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-xl w-full max-h-[85vh] overflow-y-auto p-5 sm:p-6 space-y-4 shadow-xl">
       <div class="flex items-start justify-between gap-3 border-b border-ink-300/50 pb-3">
@@ -235,6 +239,34 @@
 
       <div id="modalBody" class="text-[13px] leading-[1.85] text-ink-700 whitespace-pre-line"></div>
 
+      <!-- いいね＆コメント機能 -->
+      <div class="pt-4 border-t border-ink-300/60 space-y-4">
+        <div class="flex items-center justify-between gap-3">
+          <button id="likeArticleBtn" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-ink-300 bg-turf-50 hover:bg-gold-100 text-xs font-bold text-ink-900 transition cursor-pointer">
+            <span id="likeHeartIcon">♡</span>
+            <span>いいね</span>
+            <span id="likeCountBadge" class="font-mono text-gold-600">0</span>
+          </button>
+          <span id="commentCountLabel" class="text-[11px] text-ink-500">コメント 0件</span>
+        </div>
+
+        <div class="space-y-2.5 bg-turf-50/70 rounded-xl p-3.5 border border-ink-300/40">
+          <p class="text-xs font-bold text-ink-900">感想・ひとことコメント</p>
+          <div id="commentsList" class="space-y-2 max-h-44 overflow-y-auto text-xs"></div>
+
+          <form id="commentForm" class="space-y-2 pt-1">
+            <input id="commentAuthorInput" type="text" maxlength="20" placeholder="ニックネーム（例：競馬ファン、名無し）" class="w-full px-3 py-1.5 rounded-lg border border-ink-300 bg-white text-xs focus:outline-none focus:border-turf-700" />
+            <textarea id="commentTextInput" rows="2" maxlength="240" placeholder="エッセイや予想への感想を書いてね..." class="w-full px-3 py-1.5 rounded-lg border border-ink-300 bg-white text-xs focus:outline-none focus:border-turf-700"></textarea>
+            <div class="flex justify-end">
+              <button type="submit" class="px-3.5 py-1.5 rounded-lg bg-turf-900 hover:bg-turf-800 text-white text-xs font-bold transition cursor-pointer">
+                コメントを投稿
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- シェアバー -->
       <div class="pt-4 border-t border-ink-300/60 flex flex-wrap items-center justify-between gap-2">
         <span class="text-[11px] font-bold text-ink-500">この記事をシェアする：</span>
         <div class="flex flex-wrap items-center gap-2">
@@ -252,6 +284,7 @@
     </div>
   </div>
 
+  <!-- 記事コード作成モーダル -->
   <div id="editorModal" class="fixed inset-0 z-50 hidden bg-black/60 items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-5 space-y-3 shadow-xl">
       <div class="flex items-center justify-between">
@@ -316,6 +349,8 @@
       tanaTop3: 0
     };
 
+    const COUNTER_NAMESPACE = 'deka-horse-predictions-satoteru';
+
     let activeCategory = 'all';
     let searchQuery = '';
     let currentModalArticle = null;
@@ -378,6 +413,103 @@
         .replace(/'/g, '&#39;');
     }
 
+    function getCommentStorageKey(articleId) {
+      return `deka_comments_${articleId}`;
+    }
+
+    function getLikedStorageKey(articleId) {
+      return `deka_liked_${articleId}`;
+    }
+
+    function loadComments(articleId) {
+      try {
+        const raw = localStorage.getItem(getCommentStorageKey(articleId));
+        return raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveComments(articleId, list) {
+      try {
+        localStorage.setItem(getCommentStorageKey(articleId), JSON.stringify(list));
+      } catch (e) {}
+    }
+
+    function renderArticleComments(articleId) {
+      const listEl = document.getElementById('commentsList');
+      const countEl = document.getElementById('commentCountLabel');
+      if (!listEl || !countEl) return;
+
+      const comments = loadComments(articleId);
+      countEl.textContent = `コメント ${comments.length}件`;
+
+      if (comments.length === 0) {
+        listEl.innerHTML = '<p class="text-[11px] text-ink-500 py-1">まだコメントはありません。最初の感想をどうぞ！</p>';
+        return;
+      }
+
+      listEl.innerHTML = comments.map((c) => `
+        <div class="bg-white rounded-lg p-2.5 border border-ink-300/50 space-y-1">
+          <div class="flex items-center justify-between text-[10px] text-ink-500">
+            <span class="font-bold text-ink-900">${escapeHtml(c.author || '通りすがりのファン')}</span>
+            <span>${escapeHtml(c.date || '')}</span>
+          </div>
+          <p class="text-xs text-ink-700 whitespace-pre-line leading-relaxed">${escapeHtml(c.text)}</p>
+        </div>
+      `).join('');
+    }
+
+    async function syncArticleLikes(articleId, shouldIncrement = false) {
+      const heartEl = document.getElementById('likeHeartIcon');
+      const badgeEl = document.getElementById('likeCountBadge');
+      const btnEl = document.getElementById('likeArticleBtn');
+      if (!heartEl || !badgeEl || !btnEl) return;
+
+      const likedKey = getLikedStorageKey(articleId);
+      const alreadyLiked = localStorage.getItem(likedKey) === '1';
+
+      if (alreadyLiked) {
+        heartEl.textContent = '♥';
+        btnEl.classList.add('border-gold-500', 'bg-gold-100/70');
+      } else {
+        heartEl.textContent = '♡';
+        btnEl.classList.remove('border-gold-500', 'bg-gold-100/70');
+      }
+
+      const safeId = encodeURIComponent(articleId.replace(/[^a-zA-Z0-9_-]/g, '_'));
+      const key = `likes_${safeId}`;
+
+      try {
+        const endpoint = shouldIncrement && !alreadyLiked
+          ? `https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${key}/up`
+          : `https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${key}`;
+
+        const res = await fetch(endpoint);
+        if (!res.ok) throw new Error('Like fetch failed');
+        const data = await res.json();
+        const count = typeof data.count === 'number' ? data.count : 0;
+        badgeEl.textContent = count;
+
+        if (shouldIncrement && !alreadyLiked) {
+          localStorage.setItem(likedKey, '1');
+          heartEl.textContent = '♥';
+          btnEl.classList.add('border-gold-500', 'bg-gold-100/70');
+        }
+      } catch (e) {
+        const localFallbackKey = `deka_like_fallback_${safeId}`;
+        let fallbackCount = Number(localStorage.getItem(localFallbackKey) || '0');
+        if (shouldIncrement && !alreadyLiked) {
+          fallbackCount += 1;
+          localStorage.setItem(localFallbackKey, String(fallbackCount));
+          localStorage.setItem(likedKey, '1');
+          heartEl.textContent = '♥';
+          btnEl.classList.add('border-gold-500', 'bg-gold-100/70');
+        }
+        badgeEl.textContent = fallbackCount;
+      }
+    }
+
     function openArticleModal(article) {
       if (!article) return;
       currentModalArticle = article;
@@ -395,6 +527,9 @@
       document.getElementById('shareLineBtn').href = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}`;
       document.getElementById('shareXBtn').href = `https://x.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
       document.getElementById('copyUrlLabel').textContent = 'URLをコピー';
+
+      renderArticleComments(article.id);
+      syncArticleLikes(article.id, false);
 
       articleModal.classList.remove('hidden');
       articleModal.classList.add('flex');
@@ -476,13 +611,12 @@
 
       const visitedSessionKey = `deka_visited_${todayKey}`;
       const alreadyCounted = sessionStorage.getItem(visitedSessionKey) === '1';
-      const namespace = 'deka-horse-predictions-satoteru';
       const key = `visits_${todayKey}`;
 
       try {
         const endpoint = alreadyCounted
-          ? `https://api.counterapi.dev/v1/${namespace}/${key}`
-          : `https://api.counterapi.dev/v1/${namespace}/${key}/up`;
+          ? `https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${key}`
+          : `https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${key}/up`;
 
         const res = await fetch(endpoint);
         if (!res.ok) throw new Error('Counter fetch failed');
@@ -519,6 +653,32 @@
     document.getElementById('closeModalBtn').addEventListener('click', closeArticleModal);
     articleModal.addEventListener('click', (e) => {
       if (e.target === articleModal) closeArticleModal();
+    });
+
+    document.getElementById('likeArticleBtn').addEventListener('click', () => {
+      if (!currentModalArticle) return;
+      syncArticleLikes(currentModalArticle.id, true);
+    });
+
+    document.getElementById('commentForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!currentModalArticle) return;
+
+      const authorInput = document.getElementById('commentAuthorInput');
+      const textInput = document.getElementById('commentTextInput');
+      const text = textInput.value.trim();
+      if (!text) return;
+
+      const author = authorInput.value.trim() || '通りすがりの競馬ファン';
+      const now = new Date();
+      const dateStr = `${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, '0')}.${String(now.getDate()).padStart(2, '0')}`;
+
+      const currentList = loadComments(currentModalArticle.id);
+      currentList.push({ author, text, date: dateStr });
+      saveComments(currentModalArticle.id, currentList);
+
+      textInput.value = '';
+      renderArticleComments(currentModalArticle.id);
     });
 
     document.getElementById('copyUrlBtn').addEventListener('click', async () => {
