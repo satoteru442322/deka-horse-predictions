@@ -197,7 +197,7 @@
           </a>
         </div>
         <div class="pt-2 border-t border-ink-300/50 flex items-center justify-between text-[11px] text-ink-500">
-          <span>公開記事数: <strong id="articleCountBadge" class="text-ink-900">1</strong> 本</span>
+          <span>公開記事数: <strong id="articleCountBadge" class="text-ink-900">2</strong> 本</span>
           <span id="updateFrequencyLabel">Updated Weekly</span>
         </div>
       </section>
@@ -247,7 +247,7 @@
 
       <div id="modalPicksBox" class="hidden bg-turf-50 border border-turf-100 rounded-xl p-3 text-xs space-y-1">
         <p class="font-bold text-turf-950">予想印</p>
-        <p id="modalHonmeiLine" class="text-ink-900"></p>
+        <p id="modalHonmeiLine" class="font-bold text-ink-900"></p>
         <p id="modalTaikouLine" class="text-ink-700"></p>
         <p id="modalTanaLine" class="text-ink-700"></p>
         <p id="modalResultLine" class="text-[11px] text-gold-600 font-bold pt-1"></p>
@@ -352,7 +352,13 @@
         </div>
       </div>
 
-      <textarea id="inputBody" rows="4" placeholder="本文を入力..." class="w-full px-3 py-2 border border-ink-300 rounded-lg text-xs"></textarea>
+      <div class="space-y-1">
+        <div class="flex items-center justify-between">
+          <span class="text-[11px] font-bold text-ink-700">本文入力</span>
+          <span class="text-[10px] text-ink-500">※ <code class="bg-turf-50 px-1 rounded">**馬名**</code> のように囲むと太字（濃い文字）になります</span>
+        </div>
+        <textarea id="inputBody" rows="4" placeholder="本文を入力...（例：今回の本命は**ジャンタルマンタル**。理由は…）" class="w-full px-3 py-2 border border-ink-300 rounded-lg text-xs"></textarea>
+      </div>
       <button id="generateJsonBtn" type="button" class="px-4 py-2 rounded-lg bg-turf-900 text-white text-xs font-bold cursor-pointer">追加用オブジェクト＆実績を反映・生成</button>
       <textarea id="jsonOutput" rows="6" readonly class="w-full px-3 py-2 border border-ink-300 rounded-lg text-[11px] font-mono bg-turf-50"></textarea>
     </div>
@@ -380,6 +386,23 @@
 
     const ARTICLES = [
       {
+        id: 'art_20261122_02',
+        title: '【G1】【初予想】マイルチャンピオンシップ2026 素人現役高校生の最終結論',
+        subhead: '本命◎ロデオドライブ×モレイラで古馬マイル路線を蹂躙する',
+        category: '重賞予想',
+        tag: 'G1予想・マイルCS',
+        footerLabel: '重賞予想・コラム',
+        date: '2026.11.22',
+        picks: {
+          honmei: '8 ロデオドライブ（J.モレイラ）',
+          taikou: '12 ワールズエンド（C.デムーロ）',
+          tana: '16 スズハローム（藤懸貴志）',
+          resultText: ''
+        },
+        summary: 'このサイトでの初めての競馬予想ですが、これはめちゃくちゃに自信あります。マイルチャンピオンシップ、私はナミュール・藤岡康太のイメージですね。あの日は確かおばあちゃんの家で見た気がします…',
+        body: '**◎ 本命：8 ロデオドライブ（J.モレイラ）**\n○ 対抗：12 ワールズエンド（C.デムーロ）\n▲ 単穴：16 スズハローム（藤懸貴志）\n\nこのサイトでの初めての競馬予想ですが、これはめちゃくちゃに自信あります。\n\nマイルチャンピオンシップ、私はナミュール・藤岡康太のイメージですね。\nあの日は確かおばあちゃんの家で見た気がします。その日は親戚が来てて、皆が食事処で飯を食っている傍ら、私は客間でnetkeibaをポチポチしてましたね。\n客間でナミュールの鞍上がライアン・ムーアから藤岡康太に変わったときにめっちゃ声出たのを今でも覚えています。\n\nくだらない話はさておき、私の本命は\n\n**◎ 8番 ロデオドライブ（モレイラ）**\n\nです。\n\n私なりの根拠は2つあります。\n\n1つ目は、**「今年の3歳マイル勢、普通に強すぎない？」**という点。\nNHKマイル組で2着のアスクイキゴミがBCマイルで5着と掲示板内に入り、5着のダイヤモンドノットはスワンSで1着と古馬短距離路線で輝きを見せる活躍。さらにレザベーションはまほろばSで1着、エコロアルバはオーロSで1着……。\nと、NHKマイル後に好走している馬が多数いることから、今年の3歳マイル勢は他の世代と比べて段違いに強いと考えました。そのハイレベルなメンバーの中で東京芝1,600mを大外から差し切ったこの馬なら、新潟記念のように古馬路線でも十分勝てるんじゃね？と予想します。\n\n2つ目の根拠は、**「鞍上モレイラ、今年G1勝ってなくない？ウォウウォウ」**ってこと。\nJRA騎手の中で最もうまいといっても過言ではないモレイラが乗ったら、絶対勝つでしょってことです。\n\n京都コースは初めてで「適性あるかわからん」と言っている予想家がいると思いますが、正直、**そんなん知るか！**って感じです。\nそんなこと誰もわからないんだから、考えたってしょうがないでしょってこと。\n\nロデオドライブは、ジャンタルマンタルみたいに国内マイルを蹂躙する活躍を見せられる馬だと思います。相手関係を見ても十分勝てるはずなので、あとはジョアンの腕に任せて、1着に期待するだけです……。\n\n---\n\n**【本命以降の印と一言】**\n**○ 12. ワールズエンド（C・デムーロ）**\nどの距離でも先行できる柔軟性と騎手を評価。\n\n**▲ 16. スズハローム（藤懸貴志）**\n前走の末脚が爆発すれば一発ある。\n\n**△ 1. エルデナリ（M・バルザローナ）** 強そう。\n**△ 2. エンブロイダリー（C・ルメール）** ヴィクトリアマイルの相手が結構強い。\n**△ 10. ウォーターリヒト（幸英明）** 冬に走る。\n**△ 13. レザベーション（田口寛太）** ロデオドライブを負かしている実績。'
+      },
+      {
         id: 'art_20261122_01',
         title: 'サイト開設第一回目の投稿 挨拶',
         subhead: 'DEKA Horse race predictions 開設にあたって',
@@ -388,7 +411,7 @@
         footerLabel: 'エッセイ・読み物',
         date: '2026.11.22',
         summary: 'はじめまして。当サイト「DEKA Horse race predictions」を運営している、現役高校生のデカマサです。高校生なのでもちろん馬券購入はできませんが、つね日ごろから競馬予想を立てている（授業中とかでもしちゃってるかも）、いたって純粋でピチ…',
-        body: 'はじめまして。当サイト「DEKA Horse race predictions」を運営している、現役高校生のデカマサです。\n\n高校生なのでもちろん馬券購入はできませんが、つね日ごろから競馬予想を立てている（授業中とかでもしちゃってるかも）、いたって純粋でピチピチな素人現役高校生による目線での競馬予想を、同じ競馬ファンの方々に提供していきたいと思います。\n\nあくまで現役高校生の立場なので、皆様が期待するような血統やら確率やら好走率などの信ぴょう性がありそうなデータを提供することは難しいと思います。けれどそれは裏を返せば、よくXに転がっているような「このデータ眉唾だろ」や「絶対AIに丸投げしてるだろ」みたいな薄っぺらい予想ではなく、素人現役高校生DEKAが自分の頭で一生懸命考えた予想を、皆様の参考になるように提供していきたいということです。\n\n週末の重賞展望やレース回顧、好きな馬のことまでマイペースに更新していくので、ぜひ気軽に覗いていってください！'
+        body: 'はじめまして。当サイト「DEKA Horse race predictions」を運営している、現役高校生のデカマサです。\n\n高校生なのでもちろん馬券購入はできませんが、つね日ごろから競馬予想を立てている（授業中とかでもしちゃってるかも）、いたって純粋でピチピチな素人現役高校生による目線での競馬予想を、同じ競馬ファンの方々に提供していきたいと思います。\n\nあくまで現役高校生の立場なので、皆様が期待するような血統やら確率やら好走率などの信ぴょう性がありそうなデータを提供することは難しいと思います。けれどそれは裏を返せば、よくXに転がっているような「このデータ眉唾だろ」や「絶対AIに丸投げしてるだろ」みたいな薄っぺらい予想ではなく、**素人現役高校生DEKAが自分の頭で一生懸命考えた予想**を、皆様の参考になるように提供していきたいということです。\n\n週末の重賞展望やレース回顧、好きな馬のことまでマイペースに更新していくので、ぜひ気軽に覗いていってください！'
       }
     ];
 
@@ -484,6 +507,11 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+    }
+
+    function formatRichBody(str) {
+      const escaped = escapeHtml(str);
+      return escaped.replace(/\*\*(.+?)\*\*/g, '<strong class="font-bold text-ink-900 bg-gold-100/80 px-1 rounded">$1</strong>');
     }
 
     function getCommentStorageKey(articleId) {
@@ -591,7 +619,7 @@
       document.getElementById('modalTag').textContent = article.tag || '';
       document.getElementById('modalTitle').textContent = article.title;
       document.getElementById('modalSubhead').textContent = article.subhead || '';
-      document.getElementById('modalBody').textContent = article.body;
+      document.getElementById('modalBody').innerHTML = formatRichBody(article.body);
 
       const picksBox = document.getElementById('modalPicksBox');
       const picks = article.picks || {};
@@ -660,12 +688,12 @@
             </div>
             ${hasMarkBadge ? `
               <div class="bg-turf-50 rounded-lg px-3 py-2 text-[11px] text-ink-900 space-y-0.5 border border-turf-100">
-                ${picks.honmei ? `<div><strong>◎本命：</strong>${escapeHtml(picks.honmei)}</div>` : ''}
+                ${picks.honmei ? `<div class="font-bold"><strong>◎本命：</strong>${escapeHtml(picks.honmei)}</div>` : ''}
                 ${picks.taikou ? `<div><strong>○対抗：</strong>${escapeHtml(picks.taikou)}</div>` : ''}
                 ${picks.tana ? `<div><strong>▲単穴：</strong>${escapeHtml(picks.tana)}</div>` : ''}
               </div>
             ` : ''}
-            <p class="text-xs leading-relaxed text-ink-700 line-clamp-3">${escapeHtml(article.summary)}</p>
+            <p class="text-xs leading-relaxed text-ink-700 line-clamp-3">${formatRichBody(article.summary)}</p>
             <div class="pt-2.5 border-t border-ink-300/50 flex items-center justify-between text-[11px]">
               <span class="text-ink-500">${escapeHtml(article.footerLabel || article.category)}</span>
               <button type="button" data-id="${escapeHtml(article.id)}" class="read-more-btn font-bold text-turf-900 hover:text-gold-600 cursor-pointer">
@@ -863,7 +891,7 @@
 
       const rawBody = document.getElementById('inputBody').value.trim();
       const picksLines = [
-        honmei ? `◎ 本命：${honmei}` : '',
+        honmei ? `**◎ 本命：${honmei}**` : '',
         taikou ? `○ 対抗：${taikou}` : '',
         tana ? `▲ 単穴：${tana}` : ''
       ].filter(Boolean).join('\n');
