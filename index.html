@@ -6,7 +6,7 @@
   <title>DEKA Horse race predictions | 競馬予想コラム＆エッセイ</title>
   <meta name="google-site-verification" content="0092Ubh105czQ2LqA-xzq0A2q-RNaEknbiSpIt5oH7c" />
 
-  <!-- 簡易OGP設定（Xのリンクカード用） -->
+  <!-- OGP設定（Xのリンクカード用） -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="DEKA Horse race predictions" />
   <meta property="og:title" content="DEKA Horse race predictions | 競馬予想コラム＆エッセイ" />
@@ -60,7 +60,7 @@
   </script>
   <style>
     body {
-      background-color: #f6f6f3;
+      background-color: #eef3f0;
       color: #181b1a;
       font-size: 14px;
     }
@@ -73,64 +73,137 @@
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
-  <header class="bg-turf-950 text-white border-b border-gold-500/30">
-    <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-      <a href="#" id="homeResetLink" class="flex items-center gap-3.5 group">
-        <div id="brandIconWrapper" class="w-10 h-10 rounded-full bg-turf-900 border border-gold-500/60 text-gold-400 font-mono font-semibold text-base flex items-center justify-center overflow-hidden shrink-0">
-          <span id="brandInitialText">D</span>
-          <img id="brandIconImg" src="" alt="サイトアイコン" class="w-full h-full object-cover hidden" />
-        </div>
-        <div>
-          <div class="flex items-baseline gap-2 flex-wrap">
-            <span id="brandMainMark" class="font-mono font-semibold text-lg sm:text-xl tracking-[0.14em] text-white">
-              DEKA
-            </span>
-            <span class="text-gold-400/70 font-mono text-xs">//</span>
-            <span id="brandSubMark" class="font-mono text-xs sm:text-sm tracking-[0.12em] uppercase text-turf-100/90">
-              Horse race predictions
-            </span>
+  <!-- 濃い緑のヘッダー（検索バーをここに統合） -->
+  <header class="bg-turf-950 text-white border-b border-gold-500/30 sticky top-0 z-30 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+      <div class="flex items-center justify-between gap-3">
+        <a href="#" id="homeResetLink" class="flex items-center gap-3 group shrink-0">
+          <div id="brandIconWrapper" class="w-10 h-10 rounded-full bg-turf-900 border border-gold-500/60 text-gold-400 font-mono font-semibold text-base flex items-center justify-center overflow-hidden shrink-0">
+            <span id="brandInitialText">D</span>
+            <img id="brandIconImg" src="" alt="サイトアイコン" class="w-full h-full object-cover hidden" />
           </div>
-          <p id="siteSubtitleHeading" class="text-[11px] text-turf-100/65 tracking-wider mt-0.5">
-            競馬予想コラム＆エッセイ
-          </p>
-        </div>
-      </a>
+          <div>
+            <div class="flex items-baseline gap-2 flex-wrap">
+              <span id="brandMainMark" class="font-mono font-semibold text-lg sm:text-xl tracking-[0.14em] text-white">
+                DEKA
+              </span>
+              <span class="text-gold-400/70 font-mono text-xs">//</span>
+              <span id="brandSubMark" class="font-mono text-xs sm:text-sm tracking-[0.12em] uppercase text-turf-100/90">
+                Horse race predictions
+              </span>
+            </div>
+            <p id="siteSubtitleHeading" class="text-[11px] text-turf-100/65 tracking-wider mt-0.5">
+              競馬予想コラム＆エッセイ
+            </p>
+          </div>
+        </a>
+      </div>
 
-      <div class="flex flex-wrap items-center gap-2">
-        <a id="headerXLink" href="https://x.com/azuki_lovekeiba" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-xs font-medium transition">
-          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          <span>公式X</span>
-        </a>
-        <a id="headerNoteLink" href="https://note.com/deka_keibayosou/portal" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#41c9b4]/90 hover:bg-[#41c9b4] text-turf-950 text-xs font-bold transition">
-          <span>公式note</span>
-        </a>
-        <button id="openEditorBtn" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gold-500 hover:bg-gold-400 text-turf-950 text-xs font-bold transition cursor-pointer">
-          <span>&lt;/&gt; 記事コード作成</span>
-        </button>
+      <!-- 検索バー（緑のヘッダー内）＆SNS/記事作成ボタン -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 flex-1 lg:max-w-2xl lg:justify-end">
+        <div class="relative flex-1 max-w-md">
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="レース名・馬名・キーワード検索..."
+            class="w-full pl-8 pr-3 py-1.5 rounded-lg bg-turf-900/90 border border-gold-500/40 text-xs text-white placeholder-turf-100/50 focus:outline-none focus:border-gold-400"
+          />
+          <svg class="w-3.5 h-3.5 text-gold-400/80 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+          </svg>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 shrink-0">
+          <a id="headerXLink" href="https://x.com/azuki_lovekeiba" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-xs font-medium transition">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>公式X</span>
+          </a>
+          <a id="headerNoteLink" href="https://note.com/deka_keibayosou/portal" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#41c9b4]/90 hover:bg-[#41c9b4] text-turf-950 text-xs font-bold transition">
+            <span>公式note</span>
+          </a>
+          <button id="openEditorBtn" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gold-500 hover:bg-gold-400 text-turf-950 text-xs font-bold transition cursor-pointer">
+            <span>&lt;/&gt; 記事コード作成</span>
+          </button>
+        </div>
       </div>
     </div>
   </header>
 
-  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-    <div class="lg:col-span-8 space-y-4">
-      <section class="bg-white rounded-xl border border-ink-300/60 p-3.5 shadow-sm">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5">
-          <div id="categoryTabs" class="flex flex-wrap gap-1.5">
-            <button type="button" data-category="all" class="cat-btn px-3 py-1 rounded-full text-xs font-bold bg-turf-900 text-white cursor-pointer">すべて</button>
-            <button type="button" data-category="重賞予想" class="cat-btn px-3 py-1 rounded-full text-xs font-medium bg-turf-50 text-ink-700 hover:bg-turf-100 cursor-pointer">重賞予想</button>
-            <button type="button" data-category="エッセイ" class="cat-btn px-3 py-1 rounded-full text-xs font-medium bg-turf-50 text-ink-700 hover:bg-turf-100 cursor-pointer">エッセイ</button>
-            <button type="button" data-category="レース回顧" class="cat-btn px-3 py-1 rounded-full text-xs font-medium bg-turf-50 text-ink-700 hover:bg-turf-100 cursor-pointer">レース回顧</button>
-          </div>
-          <div class="w-full sm:w-56">
-            <input id="searchInput" type="search" placeholder="レース名・馬名・キーワード" class="w-full px-3 py-1.5 rounded-lg border border-ink-300 text-xs focus:outline-none focus:border-turf-700" />
-          </div>
+  <!-- 3カラムレイアウト（左：ナビ＆G1まとめ / 中央：記事一覧 / 右：トラッカー＆プロフィール） -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+    <!-- 左サイドバー（うす緑スペース） -->
+    <aside class="lg:col-span-3 space-y-4">
+      <!-- カテゴリー選択＆並び替えバー -->
+      <section class="bg-white rounded-xl border border-ink-300/60 p-4 shadow-sm space-y-3">
+        <div>
+          <p class="text-[10px] font-mono tracking-wider uppercase text-ink-500">CATEGORY</p>
+          <h2 class="font-serif text-sm font-bold text-turf-950 mt-0.5">カテゴリー絞り込み</h2>
+        </div>
+
+        <div id="categoryTabs" class="flex flex-col gap-1.5">
+          <button type="button" data-category="all" class="cat-btn w-full text-left px-3 py-2 rounded-lg text-xs font-bold bg-turf-900 text-white cursor-pointer flex items-center justify-between">
+            <span>すべて表示</span>
+            <span id="countAllBadge" class="text-[10px] opacity-80">0</span>
+          </button>
+          <button type="button" data-category="重賞予想" class="cat-btn w-full text-left px-3 py-2 rounded-lg text-xs font-medium bg-turf-50 text-ink-700 hover:bg-turf-100 cursor-pointer flex items-center justify-between">
+            <span>重賞予想</span>
+            <span id="countPredBadge" class="text-[10px] text-ink-500">0</span>
+          </button>
+          <button type="button" data-category="レース回顧" class="cat-btn w-full text-left px-3 py-2 rounded-lg text-xs font-medium bg-turf-50 text-ink-700 hover:bg-turf-100 cursor-pointer flex items-center justify-between">
+            <span>レース回顧</span>
+            <span id="countReviewBadge" class="text-[10px] text-ink-500">0</span>
+          </button>
+          <button type="button" data-category="エッセイ" class="cat-btn w-full text-left px-3 py-2 rounded-lg text-xs font-medium bg-turf-50 text-ink-700 hover:bg-turf-100 cursor-pointer flex items-center justify-between">
+            <span>エッセイ</span>
+            <span id="countEssayBadge" class="text-[10px] text-ink-500">0</span>
+          </button>
+        </div>
+
+        <!-- 並び替えツール -->
+        <div class="pt-3 border-t border-ink-300/50 space-y-1.5">
+          <label for="sortSelect" class="block text-[11px] font-bold text-ink-700">記事の並び替え</label>
+          <select id="sortSelect" class="w-full px-3 py-2 rounded-lg border border-ink-300 bg-turf-50 text-xs font-medium text-ink-900 focus:outline-none focus:border-turf-700 cursor-pointer">
+            <option value="newest">新しい順（投稿日降順）</option>
+            <option value="oldest">古い順（投稿日昇順）</option>
+            <option value="popular">人気順（いいね・反応順）</option>
+          </select>
         </div>
       </section>
 
+      <!-- G1予想＆回顧まとめ（上から積み重なる） -->
+      <section class="bg-white rounded-xl border border-gold-500/50 p-4 shadow-sm space-y-3">
+        <div class="flex items-center justify-between border-b border-ink-300/50 pb-2">
+          <div>
+            <p class="text-[10px] font-mono font-bold tracking-wider uppercase text-gold-600">G1 ARCHIVE</p>
+            <h2 class="font-serif text-sm font-bold text-turf-950">G1予想＆回顧まとめ</h2>
+          </div>
+          <span id="g1ArchiveCount" class="px-2 py-0.5 rounded-full bg-gold-100 text-gold-600 font-mono text-[10px] font-bold">0件</span>
+        </div>
+
+        <p class="text-[10px] text-ink-500 leading-relaxed">
+          G1レースの予想・回顧記事が新しい順に積み重なります。タップですぐに記事へ飛べます。
+        </p>
+
+        <div id="g1ArchiveList" class="space-y-2 max-h-96 overflow-y-auto pr-0.5"></div>
+      </section>
+    </aside>
+
+    <!-- 中央メインカラム（記事一覧＋ページネーション） -->
+    <div class="lg:col-span-6 space-y-4">
+      <div class="flex items-center justify-between px-1 text-xs text-ink-700">
+        <span id="activeFilterLabel" class="font-bold">表示中：すべての記事</span>
+        <span id="pageStatusLabel" class="text-[11px] text-ink-500">1ページ目</span>
+      </div>
+
       <section id="articlesGrid" class="space-y-4"></section>
+
+      <!-- 10記事ごとのページ送りバー -->
+      <nav id="paginationBar" class="hidden bg-white rounded-xl border border-ink-300/60 p-3 shadow-sm flex items-center justify-between gap-2 text-xs"></nav>
     </div>
 
-    <aside class="lg:col-span-4 space-y-4">
+    <!-- 右サイドバー（トラッカー・来訪者・プロフィール・ポリシー） -->
+    <aside class="lg:col-span-3 space-y-4">
       <!-- 予想印 実績トラッカー -->
       <section class="bg-white rounded-xl border border-ink-300/60 p-4 shadow-sm space-y-3">
         <div class="flex items-center justify-between">
@@ -138,20 +211,35 @@
             <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
             <span>予想印 実績トラッカー</span>
           </h2>
-          <span class="text-[11px] text-ink-500">好走率・連対率</span>
+          <span class="text-[10px] text-ink-500">タップで履歴</span>
         </div>
 
-        <div class="grid grid-cols-2 gap-2.5 text-center">
-          <div class="bg-turf-50 rounded-lg p-2.5 border border-turf-100">
-            <p class="text-[11px] font-bold text-ink-700">本命◎ 連対率</p>
-            <p id="winPlaceRate" class="text-xl font-bold text-turf-900 mt-0.5">--%</p>
-            <p id="winPlaceCount" class="text-[10px] text-ink-500">0/0 レース</p>
-          </div>
-          <div class="bg-gold-100/60 rounded-lg p-2.5 border border-gold-400/30">
-            <p class="text-[11px] font-bold text-ink-700">本命◎ 3着内率</p>
-            <p id="showRate" class="text-xl font-bold text-turf-900 mt-0.5">--%</p>
-            <p id="resultCount" class="text-[10px] text-ink-500">結果登録 0件</p>
-          </div>
+        <div class="grid grid-cols-2 gap-2 text-center">
+          <!-- 本命◎ 連対率カード -->
+          <button
+            id="openWinPlaceHistoryBtn"
+            type="button"
+            class="bg-sky-50 hover:bg-sky-100/80 rounded-lg p-2.5 border border-sky-300 transition text-center cursor-pointer"
+            title="押して本命◎の連対履歴を見る"
+          >
+            <p class="text-[11px] font-bold text-sky-900">本命◎ 連対率</p>
+            <p id="winPlaceRate" class="text-lg font-bold text-sky-700 mt-0.5">--%</p>
+            <p id="winPlaceCount" class="text-[10px] text-sky-800/80">0/0 レース</p>
+            <span class="inline-block mt-1 text-[10px] font-bold text-sky-700 underline">連対履歴 →</span>
+          </button>
+
+          <!-- 本命◎ 3着内率カード -->
+          <button
+            id="openShowHistoryBtn"
+            type="button"
+            class="bg-rose-50 hover:bg-rose-100/80 rounded-lg p-2.5 border border-rose-300 transition text-center cursor-pointer"
+            title="押して本命◎の3着内・全本命履歴を見る"
+          >
+            <p class="text-[11px] font-bold text-rose-900">本命◎ 3着内率</p>
+            <p id="showRate" class="text-lg font-bold text-rose-700 mt-0.5">--%</p>
+            <p id="resultCount" class="text-[10px] text-rose-800/80">結果登録 0件</p>
+            <span class="inline-block mt-1 text-[10px] font-bold text-rose-700 underline">3着内履歴 →</span>
+          </button>
         </div>
 
         <div class="space-y-1.5 text-xs border-t border-ink-300/50 pt-2.5">
@@ -170,7 +258,7 @@
         </div>
 
         <p class="text-[10px] leading-relaxed text-ink-500 border-t border-ink-300/50 pt-2">
-          ※公開済みコラムのレース結果に基づき、連対率・3着内率を自動集計しています。
+          ※連対率・3着内率を押すと、これまでの本命馬と戦績一覧が確認できます。
         </p>
       </section>
 
@@ -232,7 +320,7 @@
   </main>
 
   <footer class="bg-turf-950 text-turf-100/75 text-[11px] py-6 mt-10 border-t border-gold-500/20">
-    <div class="max-w-5xl mx-auto px-4 space-y-2">
+    <div class="max-w-7xl mx-auto px-4 space-y-2">
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
         <p id="footerSiteName" class="font-mono tracking-wider text-white/90">DEKA // Horse race predictions</p>
         <p>運営：デカマサ（現役素人高校生） / <a href="https://x.com/azuki_lovekeiba" target="_blank" rel="noopener noreferrer" class="underline hover:text-gold-400">公式X</a> / <a href="https://note.com/deka_keibayosou/portal" target="_blank" rel="noopener noreferrer" class="underline hover:text-gold-400">公式note</a></p>
@@ -242,6 +330,28 @@
       </p>
     </div>
   </footer>
+
+  <!-- 本命◎ 戦績・連対/3着内 履歴モーダル -->
+  <div id="trackerHistoryModal" class="fixed inset-0 z-50 hidden bg-black/60 items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full max-h-[82vh] overflow-y-auto p-5 space-y-4 shadow-xl">
+      <div class="flex items-start justify-between gap-3 border-b border-ink-300/50 pb-3">
+        <div>
+          <span id="historyBadge" class="inline-block px-2 py-0.5 rounded text-[11px] font-bold"></span>
+          <h3 id="historyModalTitle" class="font-serif text-base sm:text-lg font-bold text-ink-900 mt-1"></h3>
+          <p id="historyModalSub" class="text-xs text-ink-500 mt-0.5"></p>
+        </div>
+        <button id="closeHistoryModalBtn" type="button" class="text-ink-500 hover:text-ink-900 text-lg font-bold px-2 cursor-pointer">×</button>
+      </div>
+
+      <div id="historyFilterTabs" class="flex gap-1.5 text-xs">
+        <button type="button" data-filter="all" class="hist-tab px-3 py-1 rounded-full font-bold bg-turf-900 text-white cursor-pointer">全本命レース</button>
+        <button type="button" data-filter="top2" class="hist-tab px-3 py-1 rounded-full font-medium bg-sky-50 text-sky-900 hover:bg-sky-100 cursor-pointer">連対（1〜2着）</button>
+        <button type="button" data-filter="top3" class="hist-tab px-3 py-1 rounded-full font-medium bg-rose-50 text-rose-900 hover:bg-rose-100 cursor-pointer">3着内（1〜3着）</button>
+      </div>
+
+      <div id="historyListContainer" class="space-y-2.5 text-xs"></div>
+    </div>
+  </div>
 
   <!-- 記事詳細モーダル（いいね・コメント・シェア機能付き） -->
   <div id="articleModal" class="fixed inset-0 z-50 hidden bg-black/60 items-center justify-center p-4">
@@ -264,6 +374,7 @@
         <p id="modalHonmeiLine" class="font-bold text-ink-900"></p>
         <p id="modalTaikouLine" class="text-ink-700"></p>
         <p id="modalTanaLine" class="text-ink-700"></p>
+        <p id="modalRenkaLine" class="text-ink-700"></p>
         <p id="modalResultLine" class="text-[11px] text-gold-600 font-bold pt-1"></p>
       </div>
 
@@ -314,34 +425,53 @@
     </div>
   </div>
 
-  <!-- 記事コード作成＆予想印・実績トラッカー入力モーダル -->
+  <!-- 記事コード作成モーダル（印は固定表示・馬番と馬名だけ入力！） -->
   <div id="editorModal" class="fixed inset-0 z-50 hidden bg-black/60 items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-5 space-y-3 shadow-xl">
       <div class="flex items-center justify-between">
-        <h3 class="font-serif text-base font-bold text-ink-900">新規記事データ（JSON）＆予想印登録</h3>
+        <h3 class="font-serif text-base font-bold text-ink-900">新規記事データ（JSON）作成</h3>
         <button id="closeEditorBtn" type="button" class="text-ink-500 hover:text-ink-900 text-lg font-bold px-2 cursor-pointer">×</button>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
         <input id="inputTitle" type="text" placeholder="記事タイトル" class="px-3 py-2 border border-ink-300 rounded-lg" />
         <select id="inputCategory" class="px-3 py-2 border border-ink-300 rounded-lg">
           <option value="重賞予想">重賞予想</option>
-          <option value="エッセイ">エッセイ</option>
           <option value="レース回顧">レース回顧</option>
+          <option value="エッセイ">エッセイ</option>
         </select>
         <input id="inputDate" type="date" class="px-3 py-2 border border-ink-300 rounded-lg" />
-        <input id="inputTag" type="text" placeholder="サブタグ（例：G1展望・ご挨拶）" class="px-3 py-2 border border-ink-300 rounded-lg" />
+        <input id="inputRaceName" type="text" placeholder="レース名（例：ジャパンカップ2026）" class="px-3 py-2 border border-ink-300 rounded-lg" />
+        <input id="inputTag" type="text" placeholder="サブタグ（例：G1予想・ジャパンC）" class="px-3 py-2 border border-ink-300 rounded-lg" />
+        <input id="inputSubhead" type="text" placeholder="サブタイトル（任意）" class="px-3 py-2 border border-ink-300 rounded-lg" />
       </div>
-      <input id="inputSubhead" type="text" placeholder="サブタイトル（例：〇〇ステークス 事前考察）" class="w-full px-3 py-2 border border-ink-300 rounded-lg text-xs" />
 
-      <!-- 本命・対抗・単穴＆実績反映入力 -->
-      <div class="bg-turf-50 border border-turf-100 rounded-xl p-3 space-y-2.5 text-xs">
-        <p class="font-bold text-turf-950">予想印・実績トラッカー反映（任意）</p>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-          <input id="inputHonmei" type="text" placeholder="◎ 本命（例：12 〇〇）" class="px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
-          <input id="inputTaikou" type="text" placeholder="○ 対抗（例：05 △△）" class="px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
-          <input id="inputTana" type="text" placeholder="▲ 単穴（例：08 □□）" class="px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
+      <!-- 印は最初から固定！馬番と馬名を入れるだけ -->
+      <div class="bg-turf-50 border border-turf-100 rounded-xl p-3 space-y-2 text-xs">
+        <div class="flex items-center justify-between">
+          <p class="font-bold text-turf-950">予想印（馬番と馬名を入れるだけでOK）</p>
+          <span class="text-[10px] text-ink-500">※印は自動で付きます</span>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+
+        <div class="space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="w-16 shrink-0 font-bold text-ink-900 bg-gold-100 px-2 py-1.5 rounded text-center border border-gold-400/50">◎ 本命</span>
+            <input id="inputHonmei" type="text" placeholder="例：8 ロデオドライブ" class="flex-1 px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-16 shrink-0 font-bold text-ink-900 bg-white px-2 py-1.5 rounded text-center border border-ink-300">○ 対抗</span>
+            <input id="inputTaikou" type="text" placeholder="例：12 ワールズエンド" class="flex-1 px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-16 shrink-0 font-bold text-ink-900 bg-white px-2 py-1.5 rounded text-center border border-ink-300">▲ 単穴</span>
+            <input id="inputTana" type="text" placeholder="例：16 スズハローム" class="flex-1 px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-16 shrink-0 font-bold text-ink-700 bg-white px-2 py-1.5 rounded text-center border border-ink-300">△ 連下</span>
+            <input id="inputRenka" type="text" placeholder="例：1 エルデナリ、2 エンブロイダリー（任意）" class="flex-1 px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1.5 border-t border-ink-300/40">
           <select id="inputHonmeiResult" class="px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white">
             <option value="none">◎ 結果：未確定/対象外</option>
             <option value="first">◎ 結果：1着（連対・3着内）</option>
@@ -358,27 +488,24 @@
             <option value="yes">▲ 単穴 3着内：あり</option>
           </select>
         </div>
-        <div class="flex items-center justify-between pt-1">
-          <span class="text-[10px] text-ink-500">※生成ボタンを押すと右のトラッカーにも即反映されます</span>
-          <button id="resetTrackerBtn" type="button" class="text-[10px] font-bold text-red-600 hover:underline cursor-pointer">
-            トラッカー集計をリセット
-          </button>
-        </div>
       </div>
 
       <div class="space-y-1">
         <div class="flex items-center justify-between">
           <span class="text-[11px] font-bold text-ink-700">本文入力</span>
-          <span class="text-[10px] text-ink-500">※ <code class="bg-turf-50 px-1 rounded">**馬名**</code> のように囲むと太字（濃い文字）になります</span>
+          <span class="text-[10px] text-ink-500">※ <code class="bg-turf-50 px-1 rounded">**馬名**</code> で太字になります</span>
         </div>
-        <textarea id="inputBody" rows="4" placeholder="本文を入力...（例：今回の本命は**ジャンタルマンタル**。理由は…）" class="w-full px-3 py-2 border border-ink-300 rounded-lg text-xs"></textarea>
+        <textarea id="inputBody" rows="4" placeholder="本文を入力..." class="w-full px-3 py-2 border border-ink-300 rounded-lg text-xs"></textarea>
       </div>
-      <button id="generateJsonBtn" type="button" class="px-4 py-2 rounded-lg bg-turf-900 text-white text-xs font-bold cursor-pointer">追加用オブジェクト＆実績を反映・生成</button>
+      <button id="generateJsonBtn" type="button" class="px-4 py-2 rounded-lg bg-turf-900 text-white text-xs font-bold cursor-pointer">追加用オブジェクトを生成</button>
       <textarea id="jsonOutput" rows="6" readonly class="w-full px-3 py-2 border border-ink-300 rounded-lg text-[11px] font-mono bg-turf-50"></textarea>
     </div>
   </div>
 
   <script>
+    const PUBLIC_SITE_URL = 'https://satoteru442322.github.io/deka-horse-predictions/';
+    const ARTICLES_PER_PAGE = 10;
+
     const SITE_CONFIG = {
       brandMain: 'DEKA',
       brandSub: 'Horse race predictions',
@@ -408,9 +535,13 @@
         footerLabel: 'レース回顧・コラム',
         date: '2026.11.22',
         picks: {
+          raceName: 'マイルチャンピオンシップ2026',
           honmei: '8 ロデオドライブ（7着）',
+          honmeiRank: 'out',
           taikou: '12 ワールズエンド（15着）',
+          taikouTop3: false,
           tana: '16 スズハローム（5着）',
+          tanaTop3: false,
           resultText: '1着：1 エルデナリ / 本命◎ 7着'
         },
         summary: '初めてのG1予想でしたが、惨敗しました。〈結果〉◎ 8.ロデオドライブ 7着 / 〇 12.ワールズエンド 15着 / ▲ 16.スズハローム 5着 / 1着 1.エルデナリ…',
@@ -425,9 +556,13 @@
         footerLabel: '重賞予想・コラム',
         date: '2026.11.22',
         picks: {
+          raceName: 'マイルチャンピオンシップ2026',
           honmei: '8 ロデオドライブ（J.モレイラ）',
+          honmeiRank: 'none',
           taikou: '12 ワールズエンド（C.デムーロ）',
+          taikouTop3: false,
           tana: '16 スズハローム（藤懸貴志）',
+          tanaTop3: false,
           resultText: ''
         },
         summary: 'このサイトでの初めての競馬予想ですが、これはめちゃくちゃに自信あります。マイルチャンピオンシップ、私はナミュール・藤岡康太のイメージですね。あの日は確かおばあちゃんの家で見た気がします…',
@@ -446,44 +581,90 @@
       }
     ];
 
-    const DEFAULT_TRACKER_STATS = {
-      honmeiRaces: 1,
-      honmeiTop2: 0,
-      honmeiTop3: 0,
-      honmeiFirst: 0,
-      taikouTop3: 0,
-      tanaTop3: 0
-    };
-
-    const TRACKER_STORAGE_KEY = 'deka_tracker_stats_v1';
     const COUNTER_NAMESPACE = 'deka-horse-predictions-satoteru';
 
-    function loadTrackerStats() {
-      try {
-        const raw = localStorage.getItem(TRACKER_STORAGE_KEY);
-        if (!raw) return { ...DEFAULT_TRACKER_STATS };
-        return { ...DEFAULT_TRACKER_STATS, ...JSON.parse(raw) };
-      } catch (e) {
-        return { ...DEFAULT_TRACKER_STATS };
-      }
-    }
-
-    function saveTrackerStats(stats) {
-      try {
-        localStorage.setItem(TRACKER_STORAGE_KEY, JSON.stringify(stats));
-      } catch (e) {}
-    }
-
-    let TRACKER_STATS = loadTrackerStats();
     let activeCategory = 'all';
     let searchQuery = '';
+    let sortMode = 'newest';
+    let currentPage = 1;
     let currentModalArticle = null;
+    const likeCountCache = {};
 
     const articlesGrid = document.getElementById('articlesGrid');
+    const paginationBar = document.getElementById('paginationBar');
     const searchInput = document.getElementById('searchInput');
     const categoryTabs = document.getElementById('categoryTabs');
+    const sortSelect = document.getElementById('sortSelect');
     const articleModal = document.getElementById('articleModal');
     const editorModal = document.getElementById('editorModal');
+    const trackerHistoryModal = document.getElementById('trackerHistoryModal');
+
+    function getShareArticleUrl(articleId) {
+      const normalizedBase = PUBLIC_SITE_URL.endsWith('/') ? PUBLIC_SITE_URL : `${PUBLIC_SITE_URL}/`;
+      return `${normalizedBase}#article=${encodeURIComponent(articleId)}`;
+    }
+
+    function formatShortMonthDay(dateStr) {
+      const parts = String(dateStr || '').split('.');
+      if (parts.length === 3) {
+        return `${Number(parts[1])}月${Number(parts[2])}日`;
+      }
+      return dateStr || '';
+    }
+
+    function extractRaceLabel(article) {
+      if (article.picks && article.picks.raceName) {
+        return article.picks.raceName;
+      }
+      const cleaned = String(article.title || '')
+        .replace(/【[^】]+】/g, '')
+        .replace(/初めてのG1予想は惨敗、次へ！/g, '')
+        .trim();
+      return cleaned || article.title;
+    }
+
+    function getArticlePopularityScore(article) {
+      const likes = Number(likeCountCache[article.id] || 0);
+      const comments = loadComments(article.id).length;
+      return likes * 2 + comments;
+    }
+
+    function buildHonmeiRecords() {
+      const records = [];
+      for (const art of ARTICLES) {
+        const picks = art.picks;
+        if (!picks || !picks.honmei) continue;
+        const rank = picks.honmeiRank || 'none';
+        if (rank === 'none') continue;
+
+        const isFirst = rank === 'first';
+        const isTop2 = rank === 'first' || rank === 'second';
+        const isTop3 = rank === 'first' || rank === 'second' || rank === 'third';
+
+        let statusLabel = '着外';
+        if (isFirst) {
+          statusLabel = '1着（連対・3着内）';
+        } else if (rank === 'second') {
+          statusLabel = '2着（連対・3着内）';
+        } else if (rank === 'third') {
+          statusLabel = '3着（3着内）';
+        }
+
+        records.push({
+          articleId: art.id,
+          date: art.date,
+          shortDate: formatShortMonthDay(art.date),
+          raceName: extractRaceLabel(art),
+          honmeiHorse: picks.honmei,
+          statusLabel,
+          isFirst,
+          isTop2,
+          isTop3,
+          detailText: picks.resultText || ''
+        });
+      }
+      return records;
+    }
 
     function applySiteConfig() {
       const fullTitle = `${SITE_CONFIG.brandMain} ${SITE_CONFIG.brandSub}`;
@@ -518,6 +699,11 @@
       document.getElementById('updateFrequencyLabel').textContent = p.updateFrequency;
       document.getElementById('articleCountBadge').textContent = ARTICLES.length;
 
+      document.getElementById('countAllBadge').textContent = ARTICLES.length;
+      document.getElementById('countPredBadge').textContent = ARTICLES.filter((a) => a.category === '重賞予想').length;
+      document.getElementById('countReviewBadge').textContent = ARTICLES.filter((a) => a.category === 'レース回顧').length;
+      document.getElementById('countEssayBadge').textContent = ARTICLES.filter((a) => a.category === 'エッセイ').length;
+
       const profileInitialText = document.getElementById('profileInitialText');
       const profileAvatarImg = document.getElementById('profileAvatarImg');
       if (p.avatarImageUrl && p.avatarImageUrl.trim() !== '') {
@@ -543,6 +729,52 @@
     function formatRichBody(str) {
       const escaped = escapeHtml(str);
       return escaped.replace(/\*\*(.+?)\*\*/g, '<strong class="font-bold text-ink-900 bg-gold-100/80 px-1 rounded">$1</strong>');
+    }
+
+    function renderG1Archive() {
+      const container = document.getElementById('g1ArchiveList');
+      const countBadge = document.getElementById('g1ArchiveCount');
+      if (!container || !countBadge) return;
+
+      const g1Articles = ARTICLES.filter((art) => {
+        const text = `${art.title} ${art.tag || ''} ${art.subhead || ''}`;
+        return /g1/i.test(text);
+      });
+
+      countBadge.textContent = `${g1Articles.length}件`;
+
+      if (g1Articles.length === 0) {
+        container.innerHTML = '<p class="text-[11px] text-ink-500">まだG1記事はありません。</p>';
+        return;
+      }
+
+      container.innerHTML = g1Articles.map((art) => {
+        const isReview = art.category === 'レース回顧';
+        const pillClass = isReview
+          ? 'bg-rose-100 text-rose-800'
+          : 'bg-turf-900 text-gold-400';
+
+        return `
+          <button
+            type="button"
+            data-g1-id="${escapeHtml(art.id)}"
+            class="g1-jump-btn w-full text-left p-2.5 rounded-lg bg-turf-50 hover:bg-gold-100/60 border border-ink-300/60 hover:border-gold-500 transition cursor-pointer space-y-1"
+          >
+            <div class="flex items-center justify-between gap-1.5 text-[10px]">
+              <span class="px-1.5 py-0.5 rounded font-bold ${pillClass}">${escapeHtml(art.category)}</span>
+              <span class="text-ink-500 font-mono">${escapeHtml(art.date)}</span>
+            </div>
+            <p class="text-xs font-bold text-ink-900 leading-snug line-clamp-2">${escapeHtml(art.title)}</p>
+          </button>
+        `;
+      }).join('');
+
+      container.querySelectorAll('.g1-jump-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = ARTICLES.find((a) => a.id === btn.dataset.g1Id);
+          if (target) openArticleModal(target);
+        });
+      });
     }
 
     function getCommentStorageKey(articleId) {
@@ -592,6 +824,24 @@
       `).join('');
     }
 
+    async function preloadAllLikeCounts() {
+      await Promise.all(ARTICLES.map(async (art) => {
+        const safeId = encodeURIComponent(art.id.replace(/[^a-zA-Z0-9_-]/g, '_'));
+        const key = `likes_${safeId}`;
+        try {
+          const res = await fetch(`https://api.counterapi.dev/v1/${COUNTER_NAMESPACE}/${key}`);
+          if (!res.ok) throw new Error('fetch err');
+          const data = await res.json();
+          likeCountCache[art.id] = typeof data.count === 'number' ? data.count : 0;
+        } catch (e) {
+          likeCountCache[art.id] = Number(localStorage.getItem(`deka_like_fallback_${safeId}`) || '0');
+        }
+      }));
+      if (sortMode === 'popular') {
+        renderArticles();
+      }
+    }
+
     async function syncArticleLikes(articleId, shouldIncrement = false) {
       const heartEl = document.getElementById('likeHeartIcon');
       const badgeEl = document.getElementById('likeCountBadge');
@@ -621,6 +871,7 @@
         if (!res.ok) throw new Error('Like fetch failed');
         const data = await res.json();
         const count = typeof data.count === 'number' ? data.count : 0;
+        likeCountCache[articleId] = count;
         badgeEl.textContent = count;
 
         if (shouldIncrement && !alreadyLiked) {
@@ -638,6 +889,7 @@
           heartEl.textContent = '♥';
           btnEl.classList.add('border-gold-500', 'bg-gold-100/70');
         }
+        likeCountCache[articleId] = fallbackCount;
         badgeEl.textContent = fallbackCount;
       }
     }
@@ -654,19 +906,19 @@
 
       const picksBox = document.getElementById('modalPicksBox');
       const picks = article.picks || {};
-      const hasPicks = picks.honmei || picks.taikou || picks.tana || picks.resultText;
+      const hasPicks = picks.honmei || picks.taikou || picks.tana || picks.renka || picks.resultText;
       if (hasPicks) {
         picksBox.classList.remove('hidden');
         document.getElementById('modalHonmeiLine').textContent = picks.honmei ? `◎ 本命：${picks.honmei}` : '';
         document.getElementById('modalTaikouLine').textContent = picks.taikou ? `○ 対抗：${picks.taikou}` : '';
         document.getElementById('modalTanaLine').textContent = picks.tana ? `▲ 単穴：${picks.tana}` : '';
+        document.getElementById('modalRenkaLine').textContent = picks.renka ? `△ 連下：${picks.renka}` : '';
         document.getElementById('modalResultLine').textContent = picks.resultText ? `結果：${picks.resultText}` : '';
       } else {
         picksBox.classList.add('hidden');
       }
 
-      const baseUrl = window.location.href.split('#')[0];
-      const shareUrl = `${baseUrl}#article=${encodeURIComponent(article.id)}`;
+      const shareUrl = getShareArticleUrl(article.id);
       const shareText = `${article.title} | DEKA Horse race predictions`;
 
       document.getElementById('shareLineBtn').href = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(shareUrl)}`;
@@ -686,22 +938,101 @@
       currentModalArticle = null;
     }
 
+    function renderPagination(totalItems, totalPages) {
+      if (totalPages <= 1) {
+        paginationBar.classList.add('hidden');
+        paginationBar.innerHTML = '';
+        return;
+      }
+
+      paginationBar.classList.remove('hidden');
+      const pageButtons = [];
+      for (let p = 1; p <= totalPages; p += 1) {
+        const activeClass = p === currentPage
+          ? 'bg-turf-900 text-white font-bold'
+          : 'bg-turf-50 text-ink-700 hover:bg-turf-100';
+        pageButtons.push(`<button type="button" data-page="${p}" class="page-num-btn w-8 h-8 rounded-lg ${activeClass} cursor-pointer">${p}</button>`);
+      }
+
+      paginationBar.innerHTML = `
+        <button type="button" id="prevPageBtn" ${currentPage <= 1 ? 'disabled' : ''} class="px-3 py-1.5 rounded-lg border border-ink-300 font-bold ${currentPage <= 1 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-turf-50 cursor-pointer'}">
+          ← 前へ
+        </button>
+        <div class="flex items-center gap-1 flex-wrap justify-center">
+          ${pageButtons.join('')}
+        </div>
+        <button type="button" id="nextPageBtn" ${currentPage >= totalPages ? 'disabled' : ''} class="px-3 py-1.5 rounded-lg border border-ink-300 font-bold ${currentPage >= totalPages ? 'opacity-40 cursor-not-allowed' : 'hover:bg-turf-50 cursor-pointer'}">
+          次へ →
+        </button>
+      `;
+
+      document.getElementById('prevPageBtn')?.addEventListener('click', () => {
+        if (currentPage > 1) {
+          currentPage -= 1;
+          renderArticles();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      document.getElementById('nextPageBtn')?.addEventListener('click', () => {
+        if (currentPage < totalPages) {
+          currentPage += 1;
+          renderArticles();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      paginationBar.querySelectorAll('.page-num-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          currentPage = Number(btn.dataset.page);
+          renderArticles();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+    }
+
     function renderArticles() {
       const q = searchQuery.trim().toLowerCase();
-      const filtered = ARTICLES.filter((item) => {
+      const filtered = ARTICLES.map((item, originalIndex) => ({ item, originalIndex })).filter(({ item }) => {
         const matchCat = activeCategory === 'all' || item.category === activeCategory;
-        const picksText = item.picks ? `${item.picks.honmei || ''} ${item.picks.taikou || ''} ${item.picks.tana || ''}` : '';
+        const picksText = item.picks ? `${item.picks.raceName || ''} ${item.picks.honmei || ''} ${item.picks.taikou || ''} ${item.picks.tana || ''} ${item.picks.renka || ''}` : '';
         const targetText = `${item.title} ${item.subhead || ''} ${item.tag || ''} ${item.summary} ${item.body} ${picksText}`.toLowerCase();
         const matchQuery = !q || targetText.includes(q);
         return matchCat && matchQuery;
       });
 
-      if (filtered.length === 0) {
+      filtered.sort((a, b) => {
+        if (sortMode === 'oldest') {
+          if (a.item.date !== b.item.date) return a.item.date.localeCompare(b.item.date);
+          return b.originalIndex - a.originalIndex;
+        }
+        if (sortMode === 'popular') {
+          const diff = getArticlePopularityScore(b.item) - getArticlePopularityScore(a.item);
+          if (diff !== 0) return diff;
+          return a.originalIndex - b.originalIndex;
+        }
+        if (a.item.date !== b.item.date) return b.item.date.localeCompare(a.item.date);
+        return a.originalIndex - b.originalIndex;
+      });
+
+      const totalItems = filtered.length;
+      const totalPages = Math.max(1, Math.ceil(totalItems / ARTICLES_PER_PAGE));
+      if (currentPage > totalPages) currentPage = totalPages;
+
+      const catLabel = activeCategory === 'all' ? 'すべての記事' : activeCategory;
+      document.getElementById('activeFilterLabel').textContent = `表示中：${catLabel}（${totalItems}件）`;
+      document.getElementById('pageStatusLabel').textContent = `${currentPage} / ${totalPages} ページ`;
+
+      if (totalItems === 0) {
         articlesGrid.innerHTML = '<div class="bg-white rounded-xl border border-ink-300/60 p-6 text-center text-xs text-ink-500">該当する記事はまだありません。</div>';
+        renderPagination(0, 1);
         return;
       }
 
-      articlesGrid.innerHTML = filtered.map((article) => {
+      const startIdx = (currentPage - 1) * ARTICLES_PER_PAGE;
+      const pagedItems = filtered.slice(startIdx, startIdx + ARTICLES_PER_PAGE);
+
+      articlesGrid.innerHTML = pagedItems.map(({ item: article }) => {
         const picks = article.picks || {};
         const hasMarkBadge = picks.honmei || picks.taikou || picks.tana;
         return `
@@ -741,17 +1072,119 @@
           openArticleModal(target);
         });
       });
+
+      renderPagination(totalItems, totalPages);
     }
 
     function renderTracker() {
-      const { honmeiRaces, honmeiTop2, honmeiTop3, honmeiFirst, taikouTop3, tanaTop3 } = TRACKER_STATS;
-      document.getElementById('winPlaceRate').textContent = honmeiRaces > 0 ? `${((honmeiTop2 / honmeiRaces) * 100).toFixed(1)}%` : '--%';
-      document.getElementById('winPlaceCount').textContent = `${honmeiTop2}/${honmeiRaces} レース`;
-      document.getElementById('showRate').textContent = honmeiRaces > 0 ? `${((honmeiTop3 / honmeiRaces) * 100).toFixed(1)}%` : '--%';
-      document.getElementById('resultCount').textContent = `結果登録 ${honmeiRaces}件`;
-      document.getElementById('honmeiFirstCount').textContent = `${honmeiFirst}回`;
-      document.getElementById('taikouTop3Count').textContent = `${taikouTop3}回`;
-      document.getElementById('tanaTop3Count').textContent = `${tanaTop3}回`;
+      const records = buildHonmeiRecords();
+      const total = records.length;
+      const top2Count = records.filter((r) => r.isTop2).length;
+      const top3Count = records.filter((r) => r.isTop3).length;
+      const firstCount = records.filter((r) => r.isFirst).length;
+
+      let taikouTop3Count = 0;
+      let tanaTop3Count = 0;
+      for (const art of ARTICLES) {
+        if (art.picks && art.picks.taikouTop3) taikouTop3Count += 1;
+        if (art.picks && art.picks.tanaTop3) tanaTop3Count += 1;
+      }
+
+      document.getElementById('winPlaceRate').textContent = total > 0 ? `${((top2Count / total) * 100).toFixed(1)}%` : '--%';
+      document.getElementById('winPlaceCount').textContent = `${top2Count}/${total} レース`;
+      document.getElementById('showRate').textContent = total > 0 ? `${((top3Count / total) * 100).toFixed(1)}%` : '--%';
+      document.getElementById('resultCount').textContent = `結果登録 ${total}件`;
+      document.getElementById('honmeiFirstCount').textContent = `${firstCount}回`;
+      document.getElementById('taikouTop3Count').textContent = `${taikouTop3Count}回`;
+      document.getElementById('tanaTop3Count').textContent = `${tanaTop3Count}回`;
+    }
+
+    function renderHistoryList(filterMode) {
+      const records = buildHonmeiRecords();
+      const container = document.getElementById('historyListContainer');
+
+      document.querySelectorAll('.hist-tab').forEach((tab) => {
+        const isSelected = tab.dataset.filter === filterMode;
+        tab.className = isSelected
+          ? 'hist-tab px-3 py-1 rounded-full font-bold bg-turf-900 text-white cursor-pointer'
+          : 'hist-tab px-3 py-1 rounded-full font-medium bg-turf-50 text-ink-700 hover:bg-turf-100 cursor-pointer';
+      });
+
+      const list = records.filter((r) => {
+        if (filterMode === 'top2') return r.isTop2;
+        if (filterMode === 'top3') return r.isTop3;
+        return true;
+      });
+
+      if (list.length === 0) {
+        const emptyMsg = filterMode === 'top2'
+          ? 'まだ本命◎が連対（1〜2着）したレースはありません。次のG1で決めましょう！'
+          : filterMode === 'top3'
+            ? 'まだ本命◎が3着内に入ったレースはありません。'
+            : 'まだ結果登録された本命レースはありません。';
+        container.innerHTML = `<div class="bg-turf-50 rounded-xl p-4 text-center text-ink-500 border border-ink-300/50">${emptyMsg}</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map((item) => {
+        const badgeClass = item.isTop2
+          ? 'bg-sky-100 text-sky-900 border-sky-300'
+          : item.isTop3
+            ? 'bg-rose-100 text-rose-900 border-rose-300'
+            : 'bg-turf-50 text-ink-700 border-ink-300/60';
+
+        return `
+          <div class="rounded-xl border p-3 ${badgeClass} space-y-1">
+            <div class="flex items-center justify-between gap-2 text-[11px] font-bold">
+              <span>${escapeHtml(item.shortDate)} ${escapeHtml(item.raceName)}</span>
+              <span>${escapeHtml(item.statusLabel)}</span>
+            </div>
+            <p class="font-bold text-xs text-ink-900">本命◎：${escapeHtml(item.honmeiHorse)}</p>
+            ${item.detailText ? `<p class="text-[11px] text-ink-700">${escapeHtml(item.detailText)}</p>` : ''}
+            <div class="pt-1 text-right">
+              <button type="button" data-open-art="${escapeHtml(item.articleId)}" class="jump-article-btn text-[11px] font-bold underline cursor-pointer">
+                回顧・予想記事を開く →
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      container.querySelectorAll('.jump-article-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = ARTICLES.find((a) => a.id === btn.dataset.openArt);
+          closeHistoryModal();
+          if (target) openArticleModal(target);
+        });
+      });
+    }
+
+    function openHistoryModal(mode) {
+      const badge = document.getElementById('historyBadge');
+      const title = document.getElementById('historyModalTitle');
+      const sub = document.getElementById('historyModalSub');
+
+      if (mode === 'top2') {
+        badge.className = 'inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-sky-100 text-sky-900';
+        badge.textContent = '本命◎ 連対（1〜2着）履歴';
+        title.textContent = '本命馬 連対実績リスト';
+        sub.textContent = 'どのレースでどの馬を本命にして連対（1〜2着）したかを確認できます';
+        renderHistoryList('top2');
+      } else {
+        badge.className = 'inline-block px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-900';
+        badge.textContent = '本命◎ 3着内（1〜3着）＆全本命履歴';
+        title.textContent = '本命馬 3着内・全戦績リスト';
+        sub.textContent = '本命◎の3着内実績やこれまでの全本命馬を振り返れます';
+        renderHistoryList('all');
+      }
+
+      trackerHistoryModal.classList.remove('hidden');
+      trackerHistoryModal.classList.add('flex');
+    }
+
+    function closeHistoryModal() {
+      trackerHistoryModal.classList.add('hidden');
+      trackerHistoryModal.classList.remove('flex');
     }
 
     async function renderTodayVisitorCounter() {
@@ -789,21 +1222,41 @@
       }
     }
 
+    document.getElementById('openWinPlaceHistoryBtn').addEventListener('click', () => openHistoryModal('top2'));
+    document.getElementById('openShowHistoryBtn').addEventListener('click', () => openHistoryModal('top3'));
+    document.getElementById('closeHistoryModalBtn').addEventListener('click', closeHistoryModal);
+    trackerHistoryModal.addEventListener('click', (e) => {
+      if (e.target === trackerHistoryModal) closeHistoryModal();
+    });
+    document.getElementById('historyFilterTabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.hist-tab');
+      if (!btn) return;
+      renderHistoryList(btn.dataset.filter);
+    });
+
     categoryTabs.addEventListener('click', (e) => {
       const btn = e.target.closest('.cat-btn');
       if (!btn) return;
       activeCategory = btn.dataset.category;
+      currentPage = 1;
       document.querySelectorAll('.cat-btn').forEach((el) => {
         const active = el.dataset.category === activeCategory;
         el.className = active
-          ? 'cat-btn px-3 py-1 rounded-full text-xs font-bold bg-turf-900 text-white cursor-pointer'
-          : 'cat-btn px-3 py-1 rounded-full text-xs font-medium bg-turf-50 text-ink-700 hover:bg-turf-100 cursor-pointer';
+          ? 'cat-btn w-full text-left px-3 py-2 rounded-lg text-xs font-bold bg-turf-900 text-white cursor-pointer flex items-center justify-between'
+          : 'cat-btn w-full text-left px-3 py-2 rounded-lg text-xs font-medium bg-turf-50 text-ink-700 hover:bg-turf-100 cursor-pointer flex items-center justify-between';
       });
+      renderArticles();
+    });
+
+    sortSelect.addEventListener('change', (e) => {
+      sortMode = e.target.value;
+      currentPage = 1;
       renderArticles();
     });
 
     searchInput.addEventListener('input', (e) => {
       searchQuery = e.target.value;
+      currentPage = 1;
       renderArticles();
     });
 
@@ -840,8 +1293,7 @@
 
     document.getElementById('copyUrlBtn').addEventListener('click', async () => {
       if (!currentModalArticle) return;
-      const baseUrl = window.location.href.split('#')[0];
-      const shareUrl = `${baseUrl}#article=${encodeURIComponent(currentModalArticle.id)}`;
+      const shareUrl = getShareArticleUrl(currentModalArticle.id);
       try {
         await navigator.clipboard.writeText(shareUrl);
         document.getElementById('copyUrlLabel').textContent = 'コピーしました！';
@@ -871,14 +1323,9 @@
       }
     });
 
-    document.getElementById('resetTrackerBtn').addEventListener('click', () => {
-      TRACKER_STATS = { ...DEFAULT_TRACKER_STATS };
-      saveTrackerStats(TRACKER_STATS);
-      renderTracker();
-    });
-
     document.getElementById('generateJsonBtn').addEventListener('click', () => {
       const title = document.getElementById('inputTitle').value.trim() || '無題の記事';
+      const raceName = document.getElementById('inputRaceName').value.trim() || title;
       const subhead = document.getElementById('inputSubhead').value.trim();
       const category = document.getElementById('inputCategory').value;
       const tag = document.getElementById('inputTag').value.trim() || category;
@@ -888,7 +1335,8 @@
       const honmei = document.getElementById('inputHonmei').value.trim();
       const taikou = document.getElementById('inputTaikou').value.trim();
       const tana = document.getElementById('inputTana').value.trim();
-      const honmeiResult = document.getElementById('inputHonmeiResult').value;
+      const renka = document.getElementById('inputRenka').value.trim();
+      const honmeiRank = document.getElementById('inputHonmeiResult').value;
       const taikouTop3 = document.getElementById('inputTaikouTop3').value === 'yes';
       const tanaTop3 = document.getElementById('inputTanaTop3').value === 'yes';
 
@@ -899,32 +1347,14 @@
         third: '本命◎ 3着',
         out: '本命◎ 着外'
       };
-      const resultText = resultLabelMap[honmeiResult] || '';
-
-      if (honmeiResult !== 'none') {
-        TRACKER_STATS.honmeiRaces += 1;
-        if (honmeiResult === 'first') {
-          TRACKER_STATS.honmeiFirst += 1;
-          TRACKER_STATS.honmeiTop2 += 1;
-          TRACKER_STATS.honmeiTop3 += 1;
-        } else if (honmeiResult === 'second') {
-          TRACKER_STATS.honmeiTop2 += 1;
-          TRACKER_STATS.honmeiTop3 += 1;
-        } else if (honmeiResult === 'third') {
-          TRACKER_STATS.honmeiTop3 += 1;
-        }
-      }
-      if (taikouTop3) TRACKER_STATS.taikouTop3 += 1;
-      if (tanaTop3) TRACKER_STATS.tanaTop3 += 1;
-
-      saveTrackerStats(TRACKER_STATS);
-      renderTracker();
+      const resultText = resultLabelMap[honmeiRank] || '';
 
       const rawBody = document.getElementById('inputBody').value.trim();
       const picksLines = [
         honmei ? `**◎ 本命：${honmei}**` : '',
         taikou ? `○ 対抗：${taikou}` : '',
-        tana ? `▲ 単穴：${tana}` : ''
+        tana ? `▲ 単穴：${tana}` : '',
+        renka ? `△ 連下：${renka}` : ''
       ].filter(Boolean).join('\n');
 
       const body = [picksLines, rawBody].filter(Boolean).join('\n\n') || '本文をここに入力します。';
@@ -940,17 +1370,21 @@
         footerLabel: `${category}・コラム`,
         date,
         picks: {
+          raceName,
           honmei,
+          honmeiRank,
           taikou,
+          taikouTop3,
           tana,
+          tanaTop3,
+          renka,
           resultText
         },
         summary,
         body
       };
 
-      document.getElementById('jsonOutput').value =
-        `${JSON.stringify(obj, null, 2)},\n\n// 最新の TRACKER_STATS（コードに固定反映したい場合用）:\nconst TRACKER_STATS = ${JSON.stringify(TRACKER_STATS, null, 2)};`;
+      document.getElementById('jsonOutput').value = `${JSON.stringify(obj, null, 2)},`;
     });
 
     function checkInitialHash() {
@@ -963,9 +1397,11 @@
     }
 
     applySiteConfig();
+    renderG1Archive();
     renderArticles();
     renderTracker();
     renderTodayVisitorCounter();
+    preloadAllLikeCounts();
     checkInitialHash();
   </script>
 </body>
