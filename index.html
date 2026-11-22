@@ -245,6 +245,14 @@
         <button id="closeModalBtn" type="button" class="text-ink-500 hover:text-ink-900 text-lg font-bold px-2 cursor-pointer">×</button>
       </div>
 
+      <div id="modalPicksBox" class="hidden bg-turf-50 border border-turf-100 rounded-xl p-3 text-xs space-y-1">
+        <p class="font-bold text-turf-950">予想印</p>
+        <p id="modalHonmeiLine" class="text-ink-900"></p>
+        <p id="modalTaikouLine" class="text-ink-700"></p>
+        <p id="modalTanaLine" class="text-ink-700"></p>
+        <p id="modalResultLine" class="text-[11px] text-gold-600 font-bold pt-1"></p>
+      </div>
+
       <div id="modalBody" class="text-[13px] leading-[1.85] text-ink-700 whitespace-pre-line"></div>
 
       <!-- いいね＆コメント機能 -->
@@ -292,11 +300,11 @@
     </div>
   </div>
 
-  <!-- 記事コード作成モーダル -->
+  <!-- 記事コード作成＆予想印・実績トラッカー入力モーダル -->
   <div id="editorModal" class="fixed inset-0 z-50 hidden bg-black/60 items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto p-5 space-y-3 shadow-xl">
       <div class="flex items-center justify-between">
-        <h3 class="font-serif text-base font-bold text-ink-900">新規記事データ（JSON）作成</h3>
+        <h3 class="font-serif text-base font-bold text-ink-900">新規記事データ（JSON）＆予想印登録</h3>
         <button id="closeEditorBtn" type="button" class="text-ink-500 hover:text-ink-900 text-lg font-bold px-2 cursor-pointer">×</button>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
@@ -310,9 +318,43 @@
         <input id="inputTag" type="text" placeholder="サブタグ（例：G1展望・ご挨拶）" class="px-3 py-2 border border-ink-300 rounded-lg" />
       </div>
       <input id="inputSubhead" type="text" placeholder="サブタイトル（例：〇〇ステークス 事前考察）" class="w-full px-3 py-2 border border-ink-300 rounded-lg text-xs" />
-      <textarea id="inputBody" rows="5" placeholder="本文を入力..." class="w-full px-3 py-2 border border-ink-300 rounded-lg text-xs"></textarea>
-      <button id="generateJsonBtn" type="button" class="px-4 py-2 rounded-lg bg-turf-900 text-white text-xs font-bold cursor-pointer">追加用オブジェクトを生成</button>
-      <textarea id="jsonOutput" rows="5" readonly class="w-full px-3 py-2 border border-ink-300 rounded-lg text-[11px] font-mono bg-turf-50"></textarea>
+
+      <!-- 本命・対抗・単穴＆実績反映入力 -->
+      <div class="bg-turf-50 border border-turf-100 rounded-xl p-3 space-y-2.5 text-xs">
+        <p class="font-bold text-turf-950">予想印・実績トラッカー反映（任意）</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <input id="inputHonmei" type="text" placeholder="◎ 本命（例：12 〇〇）" class="px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
+          <input id="inputTaikou" type="text" placeholder="○ 対抗（例：05 △△）" class="px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
+          <input id="inputTana" type="text" placeholder="▲ 単穴（例：08 □□）" class="px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+          <select id="inputHonmeiResult" class="px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white">
+            <option value="none">◎ 結果：未確定/対象外</option>
+            <option value="first">◎ 結果：1着（連対・3着内）</option>
+            <option value="second">◎ 結果：2着（連対・3着内）</option>
+            <option value="third">◎ 結果：3着（3着内のみ）</option>
+            <option value="out">◎ 結果：着外（4着以下）</option>
+          </select>
+          <select id="inputTaikouTop3" class="px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white">
+            <option value="no">○ 対抗 3着内：なし</option>
+            <option value="yes">○ 対抗 3着内：あり</option>
+          </select>
+          <select id="inputTanaTop3" class="px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white">
+            <option value="no">▲ 単穴 3着内：なし</option>
+            <option value="yes">▲ 単穴 3着内：あり</option>
+          </select>
+        </div>
+        <div class="flex items-center justify-between pt-1">
+          <span class="text-[10px] text-ink-500">※生成ボタンを押すと右のトラッカーにも即反映されます</span>
+          <button id="resetTrackerBtn" type="button" class="text-[10px] font-bold text-red-600 hover:underline cursor-pointer">
+            トラッカー集計をリセット
+          </button>
+        </div>
+      </div>
+
+      <textarea id="inputBody" rows="4" placeholder="本文を入力..." class="w-full px-3 py-2 border border-ink-300 rounded-lg text-xs"></textarea>
+      <button id="generateJsonBtn" type="button" class="px-4 py-2 rounded-lg bg-turf-900 text-white text-xs font-bold cursor-pointer">追加用オブジェクト＆実績を反映・生成</button>
+      <textarea id="jsonOutput" rows="6" readonly class="w-full px-3 py-2 border border-ink-300 rounded-lg text-[11px] font-mono bg-turf-50"></textarea>
     </div>
   </div>
 
@@ -350,7 +392,7 @@
       }
     ];
 
-    const TRACKER_STATS = {
+    const DEFAULT_TRACKER_STATS = {
       honmeiRaces: 0,
       honmeiTop2: 0,
       honmeiTop3: 0,
@@ -359,8 +401,26 @@
       tanaTop3: 0
     };
 
+    const TRACKER_STORAGE_KEY = 'deka_tracker_stats_v1';
     const COUNTER_NAMESPACE = 'deka-horse-predictions-satoteru';
 
+    function loadTrackerStats() {
+      try {
+        const raw = localStorage.getItem(TRACKER_STORAGE_KEY);
+        if (!raw) return { ...DEFAULT_TRACKER_STATS };
+        return { ...DEFAULT_TRACKER_STATS, ...JSON.parse(raw) };
+      } catch (e) {
+        return { ...DEFAULT_TRACKER_STATS };
+      }
+    }
+
+    function saveTrackerStats(stats) {
+      try {
+        localStorage.setItem(TRACKER_STORAGE_KEY, JSON.stringify(stats));
+      } catch (e) {}
+    }
+
+    let TRACKER_STATS = loadTrackerStats();
     let activeCategory = 'all';
     let searchQuery = '';
     let currentModalArticle = null;
@@ -533,6 +593,19 @@
       document.getElementById('modalSubhead').textContent = article.subhead || '';
       document.getElementById('modalBody').textContent = article.body;
 
+      const picksBox = document.getElementById('modalPicksBox');
+      const picks = article.picks || {};
+      const hasPicks = picks.honmei || picks.taikou || picks.tana || picks.resultText;
+      if (hasPicks) {
+        picksBox.classList.remove('hidden');
+        document.getElementById('modalHonmeiLine').textContent = picks.honmei ? `◎ 本命：${picks.honmei}` : '';
+        document.getElementById('modalTaikouLine').textContent = picks.taikou ? `○ 対抗：${picks.taikou}` : '';
+        document.getElementById('modalTanaLine').textContent = picks.tana ? `▲ 単穴：${picks.tana}` : '';
+        document.getElementById('modalResultLine').textContent = picks.resultText ? `結果：${picks.resultText}` : '';
+      } else {
+        picksBox.classList.add('hidden');
+      }
+
       const baseUrl = window.location.href.split('#')[0];
       const shareUrl = `${baseUrl}#article=${encodeURIComponent(article.id)}`;
       const shareText = `${article.title} | DEKA Horse race predictions`;
@@ -558,7 +631,8 @@
       const q = searchQuery.trim().toLowerCase();
       const filtered = ARTICLES.filter((item) => {
         const matchCat = activeCategory === 'all' || item.category === activeCategory;
-        const targetText = `${item.title} ${item.subhead || ''} ${item.tag || ''} ${item.summary} ${item.body}`.toLowerCase();
+        const picksText = item.picks ? `${item.picks.honmei || ''} ${item.picks.taikou || ''} ${item.picks.tana || ''}` : '';
+        const targetText = `${item.title} ${item.subhead || ''} ${item.tag || ''} ${item.summary} ${item.body} ${picksText}`.toLowerCase();
         const matchQuery = !q || targetText.includes(q);
         return matchCat && matchQuery;
       });
@@ -568,28 +642,39 @@
         return;
       }
 
-      articlesGrid.innerHTML = filtered.map((article) => `
-        <article class="bg-white rounded-xl border border-ink-300/60 p-5 shadow-sm space-y-2.5 hover:border-gold-500 transition">
-          <div class="flex items-center justify-between gap-2 text-[11px] text-ink-500">
-            <div class="flex items-center gap-1.5">
-              <span class="px-2 py-0.5 rounded bg-turf-900 text-white font-bold">${escapeHtml(article.category)}</span>
-              ${article.tag ? `<span class="px-2 py-0.5 rounded bg-turf-50 text-ink-700 font-medium">${escapeHtml(article.tag)}</span>` : ''}
+      articlesGrid.innerHTML = filtered.map((article) => {
+        const picks = article.picks || {};
+        const hasMarkBadge = picks.honmei || picks.taikou || picks.tana;
+        return `
+          <article class="bg-white rounded-xl border border-ink-300/60 p-5 shadow-sm space-y-2.5 hover:border-gold-500 transition">
+            <div class="flex items-center justify-between gap-2 text-[11px] text-ink-500">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="px-2 py-0.5 rounded bg-turf-900 text-white font-bold">${escapeHtml(article.category)}</span>
+                ${article.tag ? `<span class="px-2 py-0.5 rounded bg-turf-50 text-ink-700 font-medium">${escapeHtml(article.tag)}</span>` : ''}
+              </div>
+              <time>${escapeHtml(article.date)}</time>
             </div>
-            <time>${escapeHtml(article.date)}</time>
-          </div>
-          <div>
-            <h2 class="font-serif text-base sm:text-lg font-bold text-ink-900 leading-snug">${escapeHtml(article.title)}</h2>
-            ${article.subhead ? `<p class="text-[11px] font-medium text-ink-500 mt-0.5">${escapeHtml(article.subhead)}</p>` : ''}
-          </div>
-          <p class="text-xs leading-relaxed text-ink-700 line-clamp-3">${escapeHtml(article.summary)}</p>
-          <div class="pt-2.5 border-t border-ink-300/50 flex items-center justify-between text-[11px]">
-            <span class="text-ink-500">${escapeHtml(article.footerLabel || article.category)}</span>
-            <button type="button" data-id="${escapeHtml(article.id)}" class="read-more-btn font-bold text-turf-900 hover:text-gold-600 cursor-pointer">
-              続きを読む →
-            </button>
-          </div>
-        </article>
-      `).join('');
+            <div>
+              <h2 class="font-serif text-base sm:text-lg font-bold text-ink-900 leading-snug">${escapeHtml(article.title)}</h2>
+              ${article.subhead ? `<p class="text-[11px] font-medium text-ink-500 mt-0.5">${escapeHtml(article.subhead)}</p>` : ''}
+            </div>
+            ${hasMarkBadge ? `
+              <div class="bg-turf-50 rounded-lg px-3 py-2 text-[11px] text-ink-900 space-y-0.5 border border-turf-100">
+                ${picks.honmei ? `<div><strong>◎本命：</strong>${escapeHtml(picks.honmei)}</div>` : ''}
+                ${picks.taikou ? `<div><strong>○対抗：</strong>${escapeHtml(picks.taikou)}</div>` : ''}
+                ${picks.tana ? `<div><strong>▲単穴：</strong>${escapeHtml(picks.tana)}</div>` : ''}
+              </div>
+            ` : ''}
+            <p class="text-xs leading-relaxed text-ink-700 line-clamp-3">${escapeHtml(article.summary)}</p>
+            <div class="pt-2.5 border-t border-ink-300/50 flex items-center justify-between text-[11px]">
+              <span class="text-ink-500">${escapeHtml(article.footerLabel || article.category)}</span>
+              <button type="button" data-id="${escapeHtml(article.id)}" class="read-more-btn font-bold text-turf-900 hover:text-gold-600 cursor-pointer">
+                続きを読む →
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
 
       document.querySelectorAll('.read-more-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -727,6 +812,12 @@
       }
     });
 
+    document.getElementById('resetTrackerBtn').addEventListener('click', () => {
+      TRACKER_STATS = { ...DEFAULT_TRACKER_STATS };
+      saveTrackerStats(TRACKER_STATS);
+      renderTracker();
+    });
+
     document.getElementById('generateJsonBtn').addEventListener('click', () => {
       const title = document.getElementById('inputTitle').value.trim() || '無題の記事';
       const subhead = document.getElementById('inputSubhead').value.trim();
@@ -734,8 +825,51 @@
       const tag = document.getElementById('inputTag').value.trim() || category;
       const rawDate = document.getElementById('inputDate').value || '2026-11-22';
       const date = rawDate.replace(/-/g, '.');
-      const body = document.getElementById('inputBody').value.trim() || '本文をここに入力します。';
-      const summary = body.replace(/\n+/g, ' ').slice(0, 110) + (body.length > 110 ? '…' : '');
+
+      const honmei = document.getElementById('inputHonmei').value.trim();
+      const taikou = document.getElementById('inputTaikou').value.trim();
+      const tana = document.getElementById('inputTana').value.trim();
+      const honmeiResult = document.getElementById('inputHonmeiResult').value;
+      const taikouTop3 = document.getElementById('inputTaikouTop3').value === 'yes';
+      const tanaTop3 = document.getElementById('inputTanaTop3').value === 'yes';
+
+      const resultLabelMap = {
+        none: '',
+        first: '本命◎ 1着',
+        second: '本命◎ 2着',
+        third: '本命◎ 3着',
+        out: '本命◎ 着外'
+      };
+      const resultText = resultLabelMap[honmeiResult] || '';
+
+      if (honmeiResult !== 'none') {
+        TRACKER_STATS.honmeiRaces += 1;
+        if (honmeiResult === 'first') {
+          TRACKER_STATS.honmeiFirst += 1;
+          TRACKER_STATS.honmeiTop2 += 1;
+          TRACKER_STATS.honmeiTop3 += 1;
+        } else if (honmeiResult === 'second') {
+          TRACKER_STATS.honmeiTop2 += 1;
+          TRACKER_STATS.honmeiTop3 += 1;
+        } else if (honmeiResult === 'third') {
+          TRACKER_STATS.honmeiTop3 += 1;
+        }
+      }
+      if (taikouTop3) TRACKER_STATS.taikouTop3 += 1;
+      if (tanaTop3) TRACKER_STATS.tanaTop3 += 1;
+
+      saveTrackerStats(TRACKER_STATS);
+      renderTracker();
+
+      const rawBody = document.getElementById('inputBody').value.trim();
+      const picksLines = [
+        honmei ? `◎ 本命：${honmei}` : '',
+        taikou ? `○ 対抗：${taikou}` : '',
+        tana ? `▲ 単穴：${tana}` : ''
+      ].filter(Boolean).join('\n');
+
+      const body = [picksLines, rawBody].filter(Boolean).join('\n\n') || '本文をここに入力します。';
+      const summary = (rawBody || body).replace(/\n+/g, ' ').slice(0, 110) + ((rawBody || body).length > 110 ? '…' : '');
       const id = `art_${Date.now()}`;
 
       const obj = {
@@ -746,10 +880,18 @@
         tag,
         footerLabel: `${category}・コラム`,
         date,
+        picks: {
+          honmei,
+          taikou,
+          tana,
+          resultText
+        },
         summary,
         body
       };
-      document.getElementById('jsonOutput').value = `${JSON.stringify(obj, null, 2)},`;
+
+      document.getElementById('jsonOutput').value =
+        `${JSON.stringify(obj, null, 2)},\n\n// 最新の TRACKER_STATS（コードに固定反映したい場合用）:\nconst TRACKER_STATS = ${JSON.stringify(TRACKER_STATS, null, 2)};`;
     });
 
     function checkInitialHash() {
