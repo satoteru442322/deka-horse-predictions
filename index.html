@@ -10,13 +10,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="DEKA Horse race predictions" />
   <meta property="og:title" content="DEKA Horse race predictions | 競馬予想コラム＆エッセイ" />
-  <meta property="og:description" content="現役素人高校生デカマサの重賞予想・レース回顧・競馬エッセイ。来週のジャパンカップも全力予想！" />
+  <meta property="og:description" content="現役素人高校生デカマサの重賞予想・レース回顧・競馬エッセイ。ジャパンカップ2026も全力予想！" />
   <meta property="og:url" content="https://satoteru442322.github.io/deka-horse-predictions/" />
   <meta property="og:image" content="https://satoteru442322.github.io/deka-horse-predictions/ogp.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@azuki_lovekeiba" />
   <meta name="twitter:title" content="DEKA Horse race predictions | 競馬予想コラム＆エッセイ" />
-  <meta name="twitter:description" content="現役素人高校生デカマサの重賞予想＆レース回顧。来週のジャパンカップに向けて！" />
+  <meta name="twitter:description" content="現役素人高校生デカマサの重賞予想＆レース回顧。ジャパンカップ2026に向けて！" />
   <meta name="twitter:image" content="https://satoteru442322.github.io/deka-horse-predictions/ogp.png" />
 
   <script src="https://cdn.tailwindcss.com"></script>
@@ -259,7 +259,7 @@
         </p>
       </section>
 
-      <!-- 今日の来訪者カウンター（更新確認押下では閲覧数が増えない） -->
+      <!-- 今日の来訪者カウンター -->
       <section class="bg-white rounded-xl border border-ink-300/60 p-4 shadow-sm space-y-2">
         <div class="flex items-center justify-between">
           <div>
@@ -271,7 +271,7 @@
           </div>
           <div class="text-right">
             <p id="todayVisitorCount" class="font-mono text-xl font-bold text-turf-900">--<span class="text-xs font-sans font-normal text-ink-500 ml-0.5">人</span></p>
-            <p id="visitorUpdatedDate" class="text-[10px] text-ink-500">2026.11.22</p>
+            <p id="visitorUpdatedDate" class="text-[10px] text-ink-500">2026.11.28</p>
           </div>
         </div>
         <div class="pt-1.5 border-t border-ink-300/40 flex items-center justify-between text-[10px] text-ink-500">
@@ -305,7 +305,7 @@
           </a>
         </div>
         <div class="pt-2 border-t border-ink-300/50 flex items-center justify-between text-[11px] text-ink-500">
-          <span>公開記事数: <strong id="articleCountBadge" class="text-ink-900">3</strong> 本</span>
+          <span>公開記事数: <strong id="articleCountBadge" class="text-ink-900">4</strong> 本</span>
           <span id="updateFrequencyLabel">Updated Weekly</span>
         </div>
       </section>
@@ -483,19 +483,19 @@
         <div class="space-y-2">
           <div class="flex items-center gap-2">
             <span class="w-16 shrink-0 font-bold text-ink-900 bg-gold-100 px-2 py-1.5 rounded text-center border border-gold-400/50">◎ 本命</span>
-            <input id="inputHonmei" type="text" placeholder="例：8 ロデオドライブ" class="flex-1 px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
+            <input id="inputHonmei" type="text" placeholder="例：17ゴリアット" class="flex-1 px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
           </div>
           <div class="flex items-center gap-2">
             <span class="w-16 shrink-0 font-bold text-ink-900 bg-white px-2 py-1.5 rounded text-center border border-ink-300">○ 対抗</span>
-            <input id="inputTaikou" type="text" placeholder="例：12 ワールズエンド" class="flex-1 px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
+            <input id="inputTaikou" type="text" placeholder="例：8オンブズマン" class="flex-1 px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
           </div>
           <div class="flex items-center gap-2">
             <span class="w-16 shrink-0 font-bold text-ink-900 bg-white px-2 py-1.5 rounded text-center border border-ink-300">▲ 単穴</span>
-            <input id="inputTana" type="text" placeholder="例：16 スズハローム" class="flex-1 px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
+            <input id="inputTana" type="text" placeholder="例：1ヘデントール" class="flex-1 px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
           </div>
           <div class="flex items-center gap-2">
             <span class="w-16 shrink-0 font-bold text-ink-700 bg-white px-2 py-1.5 rounded text-center border border-ink-300">△ 連下</span>
-            <input id="inputRenka" type="text" placeholder="例：1 エルデナリ、2 エンブロイダリー（任意）" class="flex-1 px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
+            <input id="inputRenka" type="text" placeholder="例：4クロワデュノール 6マスカレードボール..." class="flex-1 px-2.5 py-1.5 border border-ink-300 rounded-lg bg-white" />
           </div>
         </div>
 
@@ -573,6 +573,28 @@
 
     const BASE_ARTICLES = [
       {
+        id: 'art_1795872324089',
+        title: '【G1予想】ジャパンカップ2026 現役素人高校生の徹底全力予想',
+        subhead: '今年のジャパンカップは過去最高更新',
+        category: '重賞予想',
+        tag: 'G1予想',
+        footerLabel: '重賞予想・コラム',
+        date: '2026.11.28',
+        picks: {
+          raceName: 'ジャパンカップ2026',
+          honmei: '17ゴリアット',
+          honmeiRank: 'none',
+          taikou: '8オンブズマン',
+          taikouTop3: false,
+          tana: '1ヘデントール',
+          tanaTop3: false,
+          renka: '4クロワデュノール 6マスカレードボール 9カランダガン 13アーバンシック 14タガノデュード 16ダノンデサイル',
+          resultText: ''
+        },
+        summary: '今年のジャパンカップ、過去最高レベルで最強馬が揃ってる気がする。 競馬歴5年のひよっこが言うことではないが。 また個人的なくだらない話になりますが、今回のジャパンカップの予想にあたって、ニッカンのジャパンカップ特集を買わ…',
+        body: '**◎ 本命：17ゴリアット**\n○ 対抗：8オンブズマン\n▲ 単穴：1ヘデントール\n△ 連下：4クロワデュノール 6マスカレードボール 9カランダガン 13アーバンシック 14タガノデュード 16ダノンデサイル\n\n今年のジャパンカップ、過去最高レベルで最強馬が揃ってる気がする。\n競馬歴5年のひよっこが言うことではないが。\n\nまた個人的なくだらない話になりますが、今回のジャパンカップの予想にあたって、ニッカンのジャパンカップ特集を買わせてもらったんですけど、いつの間にか値上げしてました。（450円→550円）\nワンコインで買えてたんですけど、五百円玉と余計な小銭を使わないと買えなくなって結構めんどくさい。\nまあ、私はau PAYで支払うんですけど😅。\n\nくだらない話はさておき。私のジャパンカップの本命は\n\n**◎ 17番 ゴリアット（スミヨン）**\n\nです。\n\nなぜオンブズマンやカランダガンじゃないんだっていう意見、よくわかります。\nしかし、なぜ私がこの馬を選んだかという根拠は、この馬の**芝2400m適性**と、**一昨年のジャパンカップの結果**と、**ただの俺のロマン**です。\n\nこの馬は、世界の数々の芝2400mのレースを制しているれっきとした実績馬で、ただ近走で馬柱を汚しているだけで、実力的にはカランダガンやオンブズマンを倒すことができるものを持っていると思う。\n\nまた、一昨年のジャパンカップの結果というのは、もちろんドウデュースが勝ったのはご存じであると思うが、その勝ち方というのは、差してはいるものの、捲りの要素が入っている勝ち方である。\nこのレースの上位馬は、ドウデュースを除いて先行馬ばかりであり、前残りのスローペース気味のレースだったことがうかがえる。\n実際、2着のドゥレッツァとシンエンペラーは第4コーナーまでに先頭に立っており、スタミナが自慢のこの2頭の馬は、そのまままんまと2着に残っている。\n\nこのレースでのゴリアットは、先行していたがキレ負けで6着に敗戦しており、差しで勝てると見込んではいないが、このジャパンカップで逃げるであろう武豊の**メイショウタバル**にぴったりマークするようにつけて、そのまま先頭に抜け出したら、馬券内には入るのかな～という予想である。\n\nここまでは俺が一生懸命考えた予想であり、ここからは俺のロマンの話になってくる。\n\n俺が考えるジャパンカップのシナリオとして……\n\n「このジャパンカップの舞台で有終の美を飾れるか、**オンブズマン**！」\n「史上3頭目のジャパンカップ2勝、さらには外国産馬初の連覇へ、**カランダガン**！」\n「ここで覚醒、新・日本総大将、**ダノンデサイル**！」\n「ここで復活か、令和の不死鳥、**クロワデュノール**！」\n\n**「それらをすべて寄せ付けない！ なめんじゃねえ！ ゴリアットーーーーー！！！」**\n\nね、めっちゃかっこよくない？？？\nやっぱ穴党って、盛大なジャイアントキリングというシナリオに興奮する生きものでして、それを追い続けるってのが真の競馬の醍醐味だと思う。\nこういうレースをジャパンカップに期待している。\n\n---\n\n**【本命以降の印と一言】**\n\n**○ 対抗 8番 オンブズマン（ビュイック）**\n芝2000mが主戦場だが、適性がありそう。普通に有終の美を飾るというシナリオもいい。\n\n**▲ 単穴 1番 ヘデントール（マーカンド）**\n1番という気味が悪い枠と、長距離を走れるスタミナというのが、エピファネイアやドゥレッツァと重なる。\n\n**△ 連下**\n**4番 クロワデュノール（C.デムーロ）** 騎手は北村友一のほうが絶対あっている。\n**6番 マスカレードボール（ルメール）** 後方から差すという展開が心配。\n**9番 カランダガン（バルザローナ）** 連覇は普通にありそうだから連下には入れる。\n**13番 アーバンシック（プーシャン）** 今までの敗戦はこの馬の実力じゃない。\n**14番 タガノデュード（M.デムーロ）** 久々の東京芝2400mでのデムーロスペシャルが見たい。\n**16番 ダノンデサイル（戸崎圭太）** どんな脚質でも勝てる柔軟性を評価。'
+      },
+      {
         id: 'art_20261122_03',
         title: '【G1回顧】マイルチャンピオンシップ2026 初めてのG1予想は惨敗、次へ！',
         subhead: '1着エルデナリの圧倒的地力と、テスト期間中のジャパンカップへの決意',
@@ -641,7 +663,8 @@
         const raw = localStorage.getItem(CUSTOM_ARTICLES_KEY);
         const parsed = raw ? JSON.parse(raw) : [];
         if (!Array.isArray(parsed)) return [];
-        const cleaned = parsed.filter((art) => !isBlankOrInvalidArticle(art));
+        const baseIds = new Set(BASE_ARTICLES.map((a) => a.id));
+        const cleaned = parsed.filter((art) => !isBlankOrInvalidArticle(art) && !baseIds.has(art.id));
         if (cleaned.length !== parsed.length) {
           localStorage.setItem(CUSTOM_ARTICLES_KEY, JSON.stringify(cleaned));
         }
@@ -653,7 +676,8 @@
 
     function saveCustomArticles(list) {
       try {
-        const cleaned = list.filter((art) => !isBlankOrInvalidArticle(art));
+        const baseIds = new Set(BASE_ARTICLES.map((a) => a.id));
+        const cleaned = list.filter((art) => !isBlankOrInvalidArticle(art) && !baseIds.has(art.id));
         localStorage.setItem(CUSTOM_ARTICLES_KEY, JSON.stringify(cleaned));
       } catch (e) {}
     }
